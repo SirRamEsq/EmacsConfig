@@ -14,10 +14,12 @@
   (interactive)
   (find-file org-mode-daily-file))
 
+(defun open-dir (dir)
+  (find-file dir)
+  (deer))
 (defun org-mode-open-dir ()
   (interactive)
-  (find-file org-mode-dir)
-  (deer))
+  (open-dir org-mode-dir))
 
 ;; Define the custum capture templates
 ;; See http://www.cachestocaches.com/2016/9/my-workflow-org-agenda/

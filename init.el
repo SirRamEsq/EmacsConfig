@@ -25,6 +25,7 @@
 
 ; Initialize the package manager
 (package-initialize)
+(setq flycheck-display-errors-delay 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; User Config Files ;;
@@ -80,7 +81,7 @@
 	("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
  '(package-selected-packages
    (quote
-	(airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+	(company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
