@@ -1,11 +1,14 @@
 ;; REQUIREMENTS
 ;;  Packages
 ;;   evil
+;;   evil-leader
 
 ; Give us back Ctrl+U for vim emulation
 (setq evil-want-C-u-scroll t)
 
 ; Use evil mode
+(require 'evil-leader)
+(global-evil-leader-mode)
 (require 'evil)
 (evil-mode t)
 

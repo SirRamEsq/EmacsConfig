@@ -5,7 +5,7 @@
 ;;   Source Code Variable
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/color-themes/")
-(load-theme 'sunburst t)
+(load-theme 'spolsky t)
 ;(add-hook 'after-init-hook (lambda () (load-theme 'taming-mr-arneson)))
 
 ; Use solarized dark (in GUI)

@@ -1,0 +1,1 @@
+("~/.emacs.d/" "~/godot/3.1/projects/project-louie/" "~/projects/xplm-go/")
