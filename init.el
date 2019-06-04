@@ -27,6 +27,13 @@
 (package-initialize)
 (setq flycheck-display-errors-delay 0)
 
+; Backup files go into this directory
+(setq backup-directory-alist `(("." . "~/.emacs-backup")))
+
+; Always show matching parens immediately
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; User Config Files ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -53,6 +60,7 @@
 (load-user-config-file "org.el")
 (load-user-config-file "go.el")
 (load-user-config-file "godot.el")
+(load-user-config-file "indentation.el")
 
 
 ;;;;;;;;;;;;;;;;;;;
@@ -60,7 +68,7 @@
 ;;;;;;;;;;;;;;;;;;;
 ;; Enable Auto-complete globally
 (add-hook 'after-init-hook 'global-company-mode)
-; No delay in showing suggestions.
+
 (setq-default company-idle-delay 0)
 ; Show suggestions after entering characters
 (setq-default company-minimum-prefix-length 2)

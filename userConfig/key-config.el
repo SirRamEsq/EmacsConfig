@@ -1,3 +1,8 @@
+(defun org-mode-open-and-refile()
+  (interactive)
+  (find-file org-mode-refile-file)
+  (org-refile))
+
 (global-set-key (kbd "<f1>") 'org-agenda)
 (global-set-key (kbd "<f2>") 'split-window-right)
 (global-set-key (kbd "<f3>") 'split-window-below)
@@ -8,11 +13,12 @@
 
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
+  "b" 'helm-buffers-list
+  "x" 'helm-M-x
   "ad" 'deer
 
   "pp" 'helm-projectile-switch-project
   "pf" 'helm-projectile-find-file
-  "b" 'helm-buffers-list
 
   "wh" 'evil-window-left
   "wl" 'evil-window-right
@@ -20,6 +26,11 @@
   "wj" 'evil-window-down
 
   "wf" 'make-frame-command
+
+  ; Org
+  "oc" 'org-capture
+  "ow" 'org-mode-open-and-refile
+  "ol" 'org-store-link
 )
 
 ; Supports mode-local bindings

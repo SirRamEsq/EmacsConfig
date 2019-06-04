@@ -7,8 +7,12 @@
 
 (defconst org-mode-daily-file
 	(let ((daily-name (format-time-string "%Y-%m-%d")))
-	(expand-file-name (concat org-mode-journal-dir "/" daily-name ".org"))))
-	"Today's org mode journal file"
+	(expand-file-name (concat org-mode-journal-dir "/" daily-name ".org")))
+	"Today's org mode journal file")
+
+(defconst org-mode-refile-file
+  (expand-file-name(concat org-mode-dir "/refile.org"))
+  "File to contain org-mode capture items")
 
 (defun org-mode-daily-file-open ()
   (interactive)

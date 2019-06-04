@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/Go/src/XPLM/" "~/Dropbox/org-mode/")
+("~/godot/3.1/projects/project-louie/" "~/Dropbox/org-mode/" "~/.emacs.d/" "~/")
