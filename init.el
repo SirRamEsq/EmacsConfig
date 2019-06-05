@@ -34,6 +34,9 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; User Config Files ;;
 ;;;;;;;;;;;;;;;;;;;;;;;

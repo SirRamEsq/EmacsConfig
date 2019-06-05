@@ -1,1 +1,0 @@
-("~/godot/3.1/projects/project-louie/" "~/Dropbox/org-mode/" "~/.emacs.d/" "~/")
