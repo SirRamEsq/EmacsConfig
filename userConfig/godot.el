@@ -1,5 +1,5 @@
 ;; Location of Godot Package
-(add-to-list 'load-path "~/.emacs.d/packages/godot-gdscript.el/")
+(add-to-list 'load-path "~/.emacs.d/packages/godot-gdscript/")
 
 ;; load the package
 (load "godot-gdscript")
