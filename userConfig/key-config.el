@@ -31,6 +31,18 @@
   "oc" 'org-capture
   "ow" 'org-mode-open-and-refile
   "ol" 'org-store-link
+
+  ; Dirs
+  "go" 'org-mode-open-dir
+  "ge" (lambda () (interactive) (open-dir "~/.emacs.d/"))
+  ; Work
+  "gw" (lambda () (interactive) (open-dir (concat org-mode-dir "/work/xplm")))
+
+  ; Files
+  ; Work
+  "fww" (lambda () (interactive) (find-file (concat org-mode-dir "/work/xplm/xplm.org")))
+  ; Work TimeTracking
+  "fwt" (lambda () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org")))
 )
 
 ; Supports mode-local bindings

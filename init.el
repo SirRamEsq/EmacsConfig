@@ -1,17 +1,3 @@
-; Packages to install
-;  org-evil
-;  org-agenda
-;  evil
-;  evil-leader
-;  ranger
-;  go-mode
-;  helm
-;  projectile
-;  helm-projectile
-;  org-projectile
-;  company
-;  godot-gdscript
-
 ; Use the package manager
 (require 'package)
 
@@ -20,15 +6,33 @@
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives 
+  (add-to-list 'package-archives
                '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ; Initialize the package manager
 (package-initialize)
 (setq flycheck-display-errors-delay 0)
 
-; Backup files go into this directory
-(setq backup-directory-alist `(("." . "~/.emacs-backup")))
+;; Backup files into temp dir
+(defconst emacs-user-backup-dir
+  "~/.emacs.d/backup-files"
+  "Directory For Emacs backup files")
+(setq backup-directory-alist
+      `(("." . ,emacs-user-backup-dir)))
+
+;; Configure autosave
+;; list file is in .emacs.d
+;; rest are in auto-save dir
+(setq auto-save-list-file-prefix "~/.emacs.d/")
+(custom-set-variables
+  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save/\\1" t))))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/auto-save/" t)
+(make-directory emacs-user-backup-dir t)
+
+;; No lock files
+(setq create-lockfiles nil)
 
 ; Always show matching parens immediately
 (show-paren-mode 1)
@@ -89,13 +93,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-	("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
+    ("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
  '(package-selected-packages
    (quote
-	(company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (magit company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(whitespace-tab ((t (:foreground "#636363")))))

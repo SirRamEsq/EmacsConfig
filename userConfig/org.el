@@ -1,6 +1,6 @@
 ;; Requirements
 ;;  Packages
-;;   
+;;
 
 ;; indent orgmode files by default
 (setq-default org-startup-indented t)
