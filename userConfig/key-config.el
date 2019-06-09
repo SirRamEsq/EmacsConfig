@@ -3,13 +3,14 @@
   (find-file org-mode-refile-file)
   (org-refile))
 
+;; <return> is GUI Enter button
+;; RET is Terminal Enter button and same as C-m
 (global-set-key (kbd "<f1>") 'org-agenda)
 (global-set-key (kbd "<f2>") 'split-window-right)
 (global-set-key (kbd "<f3>") 'split-window-below)
 (global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "C-<f1>") 'org-mode-open-dir)
 (global-set-key (kbd "M-n") 'org-mode-daily-file-open)
-(global-set-key (kbd "M-x") 'helm-M-x)
 
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key

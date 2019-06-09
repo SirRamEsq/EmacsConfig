@@ -29,6 +29,7 @@
               ("HOLD" :foreground "magenta" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold)
               ("MEETING" :foreground "cyan" :weight bold)
+              ("RV" :foreground "magenta" :weight bold)
               ("PHONE" :foreground "cyan" :weight bold))))
 
 ; The triggers break down to the following rules:
@@ -97,19 +98,19 @@
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
       (quote (("t" "todo" entry (file org-mode-refile-file)
-               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file org-mode-refile-file)
-               "* NEXT Respond to %?\n%U\n%a\n" :clock-in t :clock-resume t)
+               "* TODO %?\n%U\n%a\n")
+              ("b" "respond" entry (file org-mode-refile-file)
+               "* NEXT Respond to %?\n%U\n%a\n")
               ("n" "note" entry (file org-mode-refile-file)
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+               "* %? :NOTE:\n%U\n%a\n")
               ("j" "Journal" entry (file+datetree org-mode-daily-file)
-               "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("w" "org-protocol" entry (file org-mode-refile-file)
-               "* TODO Review %c\n%U\n" :immediate-finish t)
+               "* %?\n%U\n")
               ("m" "Meeting" entry (file org-mode-refile-file)
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+               "* MEETING with %? :MEETING:\n%U")
+              ("r" "RV" entry (file org-mode-refile-file)
+               "* RV with %? :RV:\nSCHEDULED:\n%a\n")
               ("p" "Phone call" entry (file org-mode-refile-file)
-               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+               "* PHONE %? :PHONE:\n%U")
               ("h" "Habit" entry (file org-mode-refile-file)
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
@@ -153,3 +154,8 @@
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+;;; Keys
+(add-hook 'org-mode-hook
+  (lambda ();
+  (local-set-key (kbd "<return>") 'org-open-at-point)))
