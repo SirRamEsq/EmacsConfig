@@ -1,3 +1,15 @@
+(defun toggle-transparency ()
+   (interactive)
+   (let ((alpha (frame-parameter nil 'alpha)))
+     (set-frame-parameter
+      nil 'alpha
+      (if (eql (cond ((numberp alpha) alpha)
+                     ((numberp (cdr alpha)) (cdr alpha))
+                     ;; Also handle undocumented (<active> <inactive>) form.
+                     ((numberp (cadr alpha)) (cadr alpha)))
+               100)
+          '(85 . 50) '(100 . 100)))))
+
 (defun org-mode-open-and-refile()
   (interactive)
   (find-file org-mode-refile-file)
@@ -14,6 +26,7 @@
 
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
+  "t" 'toggle-transparency
   "b" 'helm-buffers-list
   "x" 'helm-M-x
   "ad" 'deer

@@ -20,6 +20,9 @@
 (setq backup-directory-alist
       `(("." . ,emacs-user-backup-dir)))
 
+(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+
 ;; Configure autosave
 ;; list file is in .emacs.d
 ;; rest are in auto-save dir
