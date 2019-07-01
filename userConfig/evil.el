@@ -6,6 +6,11 @@
 ; Give us back Ctrl+U for vim emulation
 (setq evil-want-C-u-scroll t)
 
+; Enable searching with "*" and "#" from visual mode
+(add-to-list 'load-path "~/.emacs.d/packages/evil-visualstar/")
+(load "evil-visualstar")
+(global-evil-visualstar-mode)
+
 ; Use evil mode
 (require 'evil-leader)
 (global-evil-leader-mode)
