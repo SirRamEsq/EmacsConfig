@@ -156,6 +156,6 @@
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
 ;;; Keys
-(add-hook 'org-mode-hook
-  (lambda ();
-  (local-set-key (kbd "<return>") 'org-open-at-point)))
+;(add-hook 'org-mode-hook
+  ;(lambda ();
+  ;(local-set-key (kbd "<return>") 'org-open-at-point)))

@@ -45,6 +45,7 @@
   "oc" 'org-capture
   "ow" 'org-mode-open-and-refile
   "ol" 'org-store-link
+  "oo" 'org-open-at-point
 
   ; Dirs
   "go" 'org-mode-open-dir

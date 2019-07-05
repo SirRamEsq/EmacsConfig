@@ -38,3 +38,10 @@
 (setq whitespace-display-mappings
   '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
 (global-whitespace-mode) ; Enable whitespace mode everywhere
+
+
+(add-hook 'nxml-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode t)
+        (setq tab-width 2)))
+
