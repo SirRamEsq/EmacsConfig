@@ -47,3 +47,5 @@
   (setq evil-operator-state-cursor '("red" hollow))
 )
 
+;; :q should kill the current buffer rather than quitting emacs entirely
+(evil-ex-define-cmd "q" 'kill-this-buffer)

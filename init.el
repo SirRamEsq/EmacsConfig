@@ -1,8 +1,10 @@
-; Use the package manager
-(require 'package)
-
-(add-to-list 'package-archives
- '("melpa" . "http://melpa.org/packages/") t)
+(when (>= emacs-major-version 24)
+  ; Use the package manager
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives
+    '("melpa" . "http://melpa.org/packages/") t)
+  (package-refresh-contents))
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -28,7 +30,17 @@
 ;; rest are in auto-save dir
 (setq auto-save-list-file-prefix "~/.emacs.d/")
 (custom-set-variables
-  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save/\\1" t))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/auto-save/\\1" t))))
+ '(custom-safe-themes
+   (quote
+    ("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
+ '(package-selected-packages
+   (quote
+    (centaur-tabs dashboard all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -50,8 +62,10 @@
     (run-with-timer flash-sec nil #'invert-face 'mode-line)
     (run-with-timer (* 2 flash-sec) nil #'invert-face 'mode-line)
     (run-with-timer (* 3 flash-sec) nil #'invert-face 'mode-line)))
+
 (setq visible-bell nil
       ring-bell-function 'double-flash-mode-line)
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; User Config Files ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,6 +88,10 @@
 (load-user-config-file "key-config.el")
 (load-user-config-file "appearance.el")
 (load-user-config-file "powerline.el")
+(load-user-config-file "magit.el")
+(load-user-config-file "centaurTabs.el")
+(load-user-config-file "dashboard.el")
+
 ; Languages
 (load-user-config-file "org.el")
 (load-user-config-file "go.el")
@@ -97,17 +115,7 @@
 
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
- '(package-selected-packages
-   (quote
-    (magit company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
