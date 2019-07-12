@@ -5,7 +5,23 @@
 ;;   Source Code Variable
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/color-themes/")
+;; Favorite themes (pick one)
 (load-theme 'spolsky t)
+
+;;;;;;;;;;;;;;;;;
+;; DOOM THEMES ;;
+;;;;;;;;;;;;;;;;;
+;;(require 'doom-themes)
+;;(load-theme 'doom-vibrant t)
+;;(load-theme 'doom-molokai t)
+;; Global settings (defaults)
+;;(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      ;;doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;; Corrects (and improves) org-mode's native fontification.
+;;(doom-themes-org-config)
+;; Enable flashing mode-line on errors
+;;(doom-themes-visual-bell-config)
+
 ;(add-hook 'after-init-hook (lambda () (load-theme 'taming-mr-arneson)))
 
 ; Use solarized dark (in GUI)

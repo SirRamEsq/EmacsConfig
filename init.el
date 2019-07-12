@@ -1,5 +1,5 @@
 (when (>= emacs-major-version 24)
-  ; Use the package manager
+ ; Use the package manager
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives
@@ -37,10 +37,10 @@
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/auto-save/\\1" t))))
  '(custom-safe-themes
    (quote
-    ("0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
  '(package-selected-packages
    (quote
-    (centaur-tabs dashboard all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes powerline-evil powerline toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -90,7 +90,7 @@
 (load-user-config-file "powerline.el")
 (load-user-config-file "magit.el")
 (load-user-config-file "centaurTabs.el")
-(load-user-config-file "dashboard.el")
+;;(load-user-config-file "dashboard.el")
 
 ; Languages
 (load-user-config-file "org.el")
@@ -121,4 +121,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(centaur-tabs-default ((t (:inherit tabbar-default))))
+ '(centaur-tabs-selected ((t (:inherit tabbar-selected))))
+ '(centaur-tabs-selected-modified ((t (:inherit tabbar-selected-modified))))
+ '(centaur-tabs-unselected ((t (:inherit tabbar-unselected))))
+ '(centaur-tabs-unselected-modified ((t (:inherit tabbar-unselected-modified))))
  '(whitespace-tab ((t (:foreground "#636363")))))

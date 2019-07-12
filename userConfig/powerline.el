@@ -1,4 +1,10 @@
-(require 'powerline)
-(require 'powerline-evil)
+;(require 'powerline)
+;(require 'powerline-evil)
+(require 'smart-mode-line)
 ;(powerline-center-evil-theme)
-(powerline-evil-vim-color-theme)
+;(powerline-evil-vim-color-theme)
+; Prevent emacs from asking if this theme is safe
+(setq sml/no-confirm-load-theme t)
+(setq powerline-arrow-shape 'curve)
+(setq sml/theme 'powerline)
+(sml/setup)

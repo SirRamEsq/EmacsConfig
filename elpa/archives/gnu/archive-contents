@@ -18,9 +18,9 @@
 	 ("Leo Liu" . "sdl.web@gmail.com"))
 	(:keywords "tools" "processes" "convenience"))])
  (ada-mode .
-	   [(6 1 0)
+	   [(6 1 1)
 	    ((wisi
-	      (2 1 0))
+	      (2 1 1))
 	     (cl-lib
 	      (1 0))
 	     (emacs
@@ -2058,6 +2058,15 @@
 	   ("Justin Burkett" . "justin@burkett.cc"))
 	  (:maintainer "Justin Burkett" . "justin@burkett.cc")
 	  (:url . "https://github.com/justbur/emacs-vdiff"))])
+ (verilog-mode .
+	       [(2019 6 21 103209889)
+		nil "major mode for editing verilog source in Emacs" single
+		((:keywords "languages")
+		 (:authors
+		  ("Michael McNamara" . "mac@verilog.com")
+		  ("Wilson Snyder" . "wsnyder@wsnyder.org"))
+		 (:maintainer "Michael McNamara" . "mac@verilog.com")
+		 (:url . "http://www.veripool.org"))])
  (vigenere .
 	   [(1 0)
 	    ((emacs
@@ -2165,7 +2174,7 @@
 		("Bastien" . "bzg@gnu.org"))
 	       (:maintainer "Bastien" . "bzg@gnu.org"))])
  (wisi .
-       [(2 1 0)
+       [(2 1 1)
 	((cl-lib
 	  (1 0))
 	 (emacs
