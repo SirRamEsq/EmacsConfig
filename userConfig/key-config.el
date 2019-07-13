@@ -47,6 +47,9 @@
   "ol" 'org-store-link
   "oo" 'org-open-at-point
 
+  "-" 'text-scale-decrease
+  "+" 'text-scale-increase
+
   ; Dirs
   "go" 'org-mode-open-dir
   "ge" (lambda () (interactive) (open-dir "~/.emacs.d/"))
