@@ -4,7 +4,7 @@
   (package-initialize)
   (add-to-list 'package-archives
     '("melpa" . "http://melpa.org/packages/") t)
-  (package-refresh-contents))
+  )
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -14,6 +14,10 @@
 ; Initialize the package manager
 (package-initialize)
 (setq flycheck-display-errors-delay 0)
+
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
 
 ;; Backup files into temp dir
 (defconst emacs-user-backup-dir
@@ -89,7 +93,7 @@
 (load-user-config-file "appearance.el")
 (load-user-config-file "powerline.el")
 (load-user-config-file "magit.el")
-(load-user-config-file "centaurTabs.el")
+;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
 
 ; Languages
