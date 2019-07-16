@@ -44,7 +44,7 @@
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
  '(package-selected-packages
    (quote
-    (smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -90,9 +90,13 @@
 (load-user-config-file "evil.el")
 (load-user-config-file "general.el")
 (load-user-config-file "key-config.el")
+(load-user-config-file "crux.el")
 (load-user-config-file "appearance.el")
 (load-user-config-file "powerline.el")
 (load-user-config-file "magit.el")
+(load-user-config-file "focus.el")
+(load-user-config-file "darkroom.el")
+(load-user-config-file "origami.el")
 ;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
 
@@ -130,4 +134,12 @@
  '(centaur-tabs-selected-modified ((t (:inherit tabbar-selected-modified))))
  '(centaur-tabs-unselected ((t (:inherit tabbar-unselected))))
  '(centaur-tabs-unselected-modified ((t (:inherit tabbar-unselected-modified))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "dark orange"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "deep pink"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "chartreuse"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "deep sky blue"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "orchid"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "spring green"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1"))))
  '(whitespace-tab ((t (:foreground "#636363")))))

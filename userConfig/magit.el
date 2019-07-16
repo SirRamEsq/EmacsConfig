@@ -3,3 +3,4 @@
 ;; optional: disable additional bindings for yanking text
 ;; (setq evil-magit-use-y-for-yank nil)
 (require 'evil-magit)
+; https://github.com/emacs-evil/evil-magit

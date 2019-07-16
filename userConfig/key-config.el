@@ -1,3 +1,15 @@
+(require 'highlight-symbol)
+
+(defun fc-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (print (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+
 (defun toggle-transparency ()
    (interactive)
    (let ((alpha (frame-parameter nil 'alpha)))
@@ -23,6 +35,7 @@
 (global-set-key (kbd "<f9>") 'compile)
 (global-set-key (kbd "C-<f1>") 'org-mode-open-dir)
 (global-set-key (kbd "M-n") 'org-mode-daily-file-open)
+(global-set-key (kbd "C-x C-e") 'fc-eval-and-replace)
 
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
@@ -49,6 +62,12 @@
 
   "-" 'text-scale-decrease
   "+" 'text-scale-increase
+
+  ; Highlight
+  "hh" 'highlight-symbol
+  "hn" 'highlight-symbol-next
+  "hp" 'highlight-symbol-prev
+  "hr" 'highlight-symbol-query-replace
 
   ; Dirs
   "go" 'org-mode-open-dir
