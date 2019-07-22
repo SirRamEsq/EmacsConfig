@@ -40,7 +40,9 @@
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "t" 'toggle-transparency
-  "b" 'helm-buffers-list
+  "bb" 'helm-buffers-list
+  "bl" 'evil-next-buffer
+  "bh" 'evil-prev-buffer
   "x" 'helm-M-x
   "ad" 'deer
 
@@ -84,3 +86,9 @@
 
 ; Supports mode-local bindings
 ; (evil-leader/set-key-for-mode 'emacs-lisp-mode "b" 'byte-compile-file)
+
+; Increment and decrement numbers
+(global-set-key (kbd "C-=") 'evil-numbers/inc-at-pt)
+(global-set-key (kbd "C--") 'evil-numbers/dec-at-pt)
+(define-key evil-normal-state-map (kbd "C-=") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C--") 'evil-numbers/dec-at-pt)

@@ -15,6 +15,11 @@
 (package-initialize)
 (setq flycheck-display-errors-delay 0)
 
+; Garbage collection
+; See http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
+; 20MB Threshold
+(setq gc-cons-threshold (* 20 1024 1024))
+
 (prefer-coding-system 'utf-8)
 (setq coding-system-for-read 'utf-8)
 (setq coding-system-for-write 'utf-8)
@@ -44,7 +49,7 @@
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
  '(package-selected-packages
    (quote
-    (evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -90,13 +95,17 @@
 (load-user-config-file "evil.el")
 (load-user-config-file "general.el")
 (load-user-config-file "key-config.el")
+
 (load-user-config-file "crux.el")
 (load-user-config-file "appearance.el")
-(load-user-config-file "powerline.el")
+;(load-user-config-file "powerline.el")
+(load-user-config-file "spaceline.el")
+
 (load-user-config-file "magit.el")
 (load-user-config-file "focus.el")
 (load-user-config-file "darkroom.el")
 (load-user-config-file "origami.el")
+(load-user-config-file "beacon.el")
 ;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
 
@@ -105,6 +114,8 @@
 (load-user-config-file "go.el")
 (load-user-config-file "godot.el")
 (load-user-config-file "indentation.el")
+
+(load-user-config-file "OS_SPECIFIC.el")
 
 
 ;;;;;;;;;;;;;;;;;;;
