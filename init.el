@@ -47,6 +47,7 @@
  '(custom-safe-themes
    (quote
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
+ '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
     (hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
@@ -92,6 +93,8 @@
 
 (load-user-config-file "variables-system-specific.el")
 (load-user-config-file "variables.el")
+(load-user-config-file "OS_SPECIFIC.el")
+
 (load-user-config-file "evil.el")
 (load-user-config-file "general.el")
 (load-user-config-file "key-config.el")
@@ -115,7 +118,6 @@
 (load-user-config-file "godot.el")
 (load-user-config-file "indentation.el")
 
-(load-user-config-file "OS_SPECIFIC.el")
 
 
 ;;;;;;;;;;;;;;;;;;;
