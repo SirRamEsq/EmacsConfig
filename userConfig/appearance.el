@@ -6,7 +6,8 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/color-themes/")
 ;; Favorite themes (pick one)
-(load-theme 'spolsky t)
+(load-theme 'sunburst t)
+;(load-theme 'spolsky t)
 
 ;;;;;;;;;;;;;;;;;
 ;; DOOM THEMES ;;

@@ -11,3 +11,5 @@
 					;; Add more extensions here, if needed.
 					))
 (add-to-list 'auto-mode-alist (cons pattern 'toml-mode)))
+;; Underscore is part of word
+(add-hook 'godot-gdscript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
