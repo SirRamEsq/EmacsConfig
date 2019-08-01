@@ -7,6 +7,7 @@
 (ranger-override-dired-mode t)
 ;; Show hidden files
 (setq-default ranger-show-hidden t)
+(global-hl-line-mode 1)
 
 ; Rainbow delimtiters hooks
 (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)

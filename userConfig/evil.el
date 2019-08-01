@@ -11,6 +11,8 @@
 (load "evil-visualstar")
 (global-evil-visualstar-mode)
 
+;(setq evil-search-module 'evil-search)
+
 ; Use evil mode
 (require 'evil-leader)
 (global-evil-leader-mode)
