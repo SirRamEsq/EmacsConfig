@@ -29,11 +29,18 @@
 
 ;; <return> is GUI Enter button
 ;; RET is Terminal Enter button and same as C-m
-(global-set-key (kbd "<f1>") 'org-agenda)
+;; F1 is help
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+
 (global-set-key (kbd "<f2>") 'split-window-right)
 (global-set-key (kbd "<f3>") 'split-window-below)
 (global-set-key (kbd "<f4>") 'open-buffer-path)
 (global-set-key (kbd "<f9>") 'compile)
+(global-set-key (kbd "<f12>") 'org-agenda)
 (global-set-key (kbd "C-<f1>") 'org-mode-open-dir)
 (global-set-key (kbd "M-n") 'org-mode-daily-file-open)
 (global-set-key (kbd "C-x C-e") 'fc-eval-and-replace)
@@ -41,14 +48,30 @@
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "t" 'toggle-transparency
-  "bb" 'helm-buffers-list
+  ;"bb" 'helm-buffers-list
+  "bb" 'ivy-switch-buffer
   "bl" 'evil-next-buffer
   "bh" 'evil-prev-buffer
-  "x" 'helm-M-x
+  ;"x" 'helm-M-x
+  "x" 'counsel-M-x
   "ad" 'deer
 
-  "pp" 'helm-projectile-switch-project
-  "pf" 'helm-projectile-find-file
+  ;"pp" 'helm-projectile-switch-project
+  ;"pf" 'helm-projectile-find-file
+  "p" 'projectile-command-map
+
+  ; 'l' = Show list of things
+  ; List of kill ring
+  "ld" 'counsel-yank-pop
+  ; List of themes
+  "lt" 'counsel-load-theme
+  ; List of keys
+  "lk" 'counsel-descbinds
+
+  ; 's' = Search
+  "ss" 'swiper
+  ; grep
+  "sg" 'counsel-git-grep
 
   "wh" 'evil-window-left
   "wl" 'evil-window-right

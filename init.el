@@ -51,7 +51,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -88,17 +88,16 @@
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-config-dir)))
 
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
 (load-user-config-file "variables-system-specific.el")
 (load-user-config-file "variables.el")
 (load-user-config-file "OS_SPECIFIC.el")
 
+(load-user-config-file "projectile.el")
 (load-user-config-file "evil.el")
 (load-user-config-file "general.el")
 (load-user-config-file "key-config.el")
+(load-user-config-file "ivy.el")
+(load-user-config-file "which-key.el")
 
 (load-user-config-file "crux.el")
 (load-user-config-file "appearance.el")

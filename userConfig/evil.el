@@ -11,7 +11,7 @@
 (load "evil-visualstar")
 (global-evil-visualstar-mode)
 
-;(setq evil-search-module 'evil-search)
+(setq evil-search-module 'swiper)
 
 ; Use evil mode
 (require 'evil-leader)
@@ -38,6 +38,8 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (global-set-key [escape] 'evil-exit-emacs-state)
+(with-eval-after-load 'evil
+  (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit))
 
 ; Set cursor colors depending on mode
 (when (display-graphic-p)
