@@ -160,3 +160,14 @@
   ;(lambda ();
   ;(local-set-key (kbd "S-<return>") 'org-open-at-point)))
   ;(define-key evil-normal-state-map "<return>" 'origami-open-node-recursively)))
+
+;;;;;;;;;;;;;;;;
+;; APPEARANCE ;;
+;;;;;;;;;;;;;;;;
+;(setq org-ellipsis "..▼")
+;; use org-bullets-mode for utf8 symbols as org bullets
+(require 'org-bullets)
+;; make available "org-bullet-face" such that I can control the font size individually
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;(setq org-bullets-face-name (quote org-bullet-face))
+;(setq org-bullets-bullet-list '("○" "◎" "◉" "●" "" "" "" "" "✠" "✚" "✜" "✛" "✢" "✣" "✤" "✥"))
