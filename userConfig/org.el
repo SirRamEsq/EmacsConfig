@@ -156,7 +156,7 @@
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
 ;;; Keys
-(add-hook 'org-mode-hook
-  (lambda ();
+;(add-hook 'org-mode-hook
+  ;(lambda ();
   ;(local-set-key (kbd "S-<return>") 'org-open-at-point)))
-  (define-key evil-normal-state-map "<return>" 'origami-open-node-recursively)))
+  ;(define-key evil-normal-state-map "<return>" 'origami-open-node-recursively)))
