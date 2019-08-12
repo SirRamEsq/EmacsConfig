@@ -19,6 +19,10 @@
 (require 'evil)
 (evil-mode t)
 
+; Use Evil surround
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
 ; Escape Key as universal cancel
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.

@@ -29,7 +29,7 @@
 ;(when (display-graphic-p) (load-theme 'solarized-dark t))
 
 ; Set font in GUI mode
-(when (display-graphic-p) (set-face-attribute 'default nil :font "Source Code Variable-12"))
+(when (display-graphic-p) (set-face-attribute 'default nil :font "Source Code Variable-10"))
 
 ; GUI
 (tool-bar-mode -1)
