@@ -47,6 +47,7 @@
 
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
+  "<SPC>" 'ivy-yasnippet
   "t" 'toggle-transparency
   ;"bb" 'helm-buffers-list
   "bb" 'ivy-switch-buffer

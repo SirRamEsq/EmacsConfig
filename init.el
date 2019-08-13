@@ -51,7 +51,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -98,6 +98,7 @@
 (load-user-config-file "key-config.el")
 (load-user-config-file "ivy.el")
 (load-user-config-file "which-key.el")
+(load-user-config-file "yasnippet.el")
 
 (load-user-config-file "crux.el")
 (load-user-config-file "appearance.el")
