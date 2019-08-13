@@ -20,6 +20,10 @@
   )))
 
 (when (eq system-type 'windows-nt)
+  ; Massive performance gain with org bullets and icons
+  ; see https://github.com/sabof/org-bullets/issues/11
+  (setq inhibit-compacting-font-caches t)
+
   (defun open-buffer-path ()
   "Run explorer on the directory of the current buffer."
   (interactive)
