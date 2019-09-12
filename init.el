@@ -31,8 +31,10 @@
 (setq backup-directory-alist
       `(("." . ,emacs-user-backup-dir)))
 
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+;(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+;(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+(add-to-list 'default-frame-alist '(alpha . (100 . 100)))
 
 ;; Configure autosave
 ;; list file is in .emacs.d
@@ -51,7 +53,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -81,6 +83,7 @@
 ;; User Config Files ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 (defconst user-config-dir "~/.emacs.d/userConfig" "Location of Configuration Files")
+(require 'ranger)
 
 ; Function to load config file from user-config-dir
 (defun load-user-config-file (file)
@@ -94,7 +97,6 @@
 
 (load-user-config-file "projectile.el")
 (load-user-config-file "evil.el")
-(load-user-config-file "general.el")
 ;(load-user-config-file "key-config.el")
 (load-user-config-file "general.el")
 (load-user-config-file "ivy.el")

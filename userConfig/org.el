@@ -122,7 +122,7 @@
     (org-remove-empty-drawer-at "LOGBOOK" (point))))
 
 ;; Most note capture sessions probably won't take more than a moment
-(add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
+;(add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)

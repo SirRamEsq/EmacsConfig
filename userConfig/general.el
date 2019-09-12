@@ -30,9 +30,69 @@
   (find-file org-mode-refile-file)
   (org-refile))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Prefix Key Mappings ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+(defconst window-keys
+ '("w" (:which-key "Window")
+   "wh" (evil-window-left :which-key "Left")
+   "wl" (evil-window-right :which-key "Right")
+   "wk" (evil-window-up :which-key "Up")
+   "wj" (evil-window-down :which-key "Down")
+   "w-" (evil-window-decrease-height :which-key "DecHeight")
+   "w+" (evil-window-increase-height :which-key "IncHeight")
+   "w<" (evil-window-decrease-width :which-key "DecWidth")
+   "w>" (evil-window-increase-width :which-key "IncWidth")
+   "wf" (make-frame-command :which-key "NewFrame")))
+
+(defconst snippet-keys
+ '("s" (:which-key "Snippet")
+   "si" (ivy-yasnippet :which-key "Insert")))
+
+(defconst buffer-keys
+ '("b" (:which-key "Buffer")
+   "bb" (ivy-switch-buffer :which-key "Switch")
+   "bl" (evil-next-buffer :which-key "Next")
+   "bh" (evil-prev-buffer :which-key "Previous")))
+
+ ; 'l' = Show list of things
+(defconst list-keys
+ '("l" (:which-key "Lists")
+  "ld" (counsel-yank-pop :which-key "KillRing")
+  "lt" (counsel-load-theme :which-key "Themes")
+  "lk" (counsel-descbinds :which-key "Keys")))
+
+(defconst find-keys
+ '("f" (:which-key "Find")
+   "fs" (swiper :which-key "Swiper")
+   "fg" (counsel-git-grep :which-key "Grep")))
+
+(defconst org-keys
+ '("o" (:which-key "Org")
+   "oc" (org-capture :which-key "Capture")
+   "ow" (org-mode-open-and-refile :which-key "Refile")
+   "ol" (org-store-link :which-key "StoreLink")
+   "oo" (org-open-at-point :which-key "OpenLink")))
+
+(defconst highlight-keys
+ '("h" '(:which-key "Highlight")
+   "hh" '(highlight-symbol :which-key "Symbol")
+   "hn" '(highlight-symbol-next :which-key "Next")
+   "hp" '(highlight-symbol-prev :which-key "Prev")
+   "hr" '(highlight-symbol-query-replace :which-key "QueryReplace")))
+
+(defconst misc-keys
+ '("t" (toggle-transparency :which-key "Transparency")
+   "x" (counsel-M-x :which-key "M-x")
+   "p" (projectile-command-map :which-key "Projectile")
+   "-" (text-scale-decrease :which-key "TextDecrease")
+   "+" (text-scale-increase :which-key "TextIncrease")
+   "ad" (deer :which-key "Deer")))
+
 ;;;;;;;;;;;;
 ;; GLOBAL ;;
 ;;;;;;;;;;;;
+;(global-unset-key (kbd "SPC"))
 (general-define-key
  "<f1> f" '(counsel-describe-function :which-key "Desc Function")
  "<f1> v" '(counsel-describe-variable :which-key "Desc Variable")
@@ -49,84 +109,58 @@
  "C-x C-e" '(fc-eval-and-replace :which-key "EvalReplace")
 )
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;; DEFINE PREFIX KEY ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(general-define-key
- :states '(normal visual insert emacs)
- ; Space in Normal / Visual modes
- :prefix "SPC"
- ; Meta-Space in Insert / Emacs modes
- :non-normal-prefix "M-SPC"
-  "<SPC>" '(ivy-yasnippet :which-key "Snippet")
-  "t" '(toggle-transparency :which-key "Transparency")
-  ;"bb" 'helm-buffers-list
-  "b" '(:which-key "Buffer")
-  "bb" '(ivy-switch-buffer :which-key "Switch")
-  "bl" '(evil-next-buffer :which-key "Next")
-  "bh" '(evil-prev-buffer :which-key "Previous")
-  ;"x" 'helm-M-x
-  "x" '(counsel-M-x :which-key "M-x")
-  "ad" '(deer :which-key "Deer")
+;;;;;;;;;;
+;; EVIL ;;
+;;;;;;;;;;
+(defun add-keys-to-evil (keys)
+ (apply 'general-define-key (append '(
+  :states (normal visual insert emacs)
+  ; Space in Normal / Visual modes
+  :prefix "SPC"
+  ; Meta-Space in Insert / Emacs modes
+  :non-normal-prefix "M-SPC")
+  keys
+  ))
+)
+(add-keys-to-evil window-keys)
+(add-keys-to-evil snippet-keys)
+(add-keys-to-evil buffer-keys)
+(add-keys-to-evil list-keys)
+(add-keys-to-evil find-keys)
+;(add-keys-to-evil highlight-keys)
+(add-keys-to-evil misc-keys)
 
-  ;"pp" 'helm-projectile-switch-project
-  ;"pf" 'helm-projectile-find-file
-  "p" '(projectile-command-map :which-key "Projectile")
+;;;;;;;;;;;;;;;;;;;
+;; MODE SPECIFIC ;;
+;;;;;;;;;;;;;;;;;;;
+; All mode specific commands begin with [SPC SPC]
 
-  ; 'l' = Show list of things
-  "l" '(:which-key "Lists")
-  ; List of kill ring
-  "ld" '(counsel-yank-pop :which-key "KillRing")
-  ; List of themes
-  "lt" '(counsel-load-theme :which-key "Themes")
-  ; List of keys
-  "lk" '(counsel-descbinds :which-key "Keys")
-
-  "s" '(:which-key "Search")
-  "ss" '(swiper :which-key "Swiper")
-  "sg" '(counsel-git-grep :which-key "Grep")
-
-  "w" '(:which-key "Window")
-  "wh" '(evil-window-left :which-key "Left")
-  "wl" '(evil-window-right :which-key "Right")
-  "wk" '(evil-window-up :which-key "Up")
-  "wj" '(evil-window-down :which-key "Down")
-
-  "wf" '(make-frame-command :which-key "NewFrame")
-
-  ; Org
-  "o" '(:which-key "Org")
-  "oc" '(org-capture :which-key "Capture")
-  "ow" '(org-mode-open-and-refile :which-key "Refile")
-  "ol" '(org-store-link :which-key "StoreLink")
-  "oo" '(org-open-at-point :which-key "OpenLink")
-
-  "-" '(text-scale-decrease :which-key "TextDecrease")
-  "+" '(text-scale-increase :which-key "TextIncrease")
-
-  ; Highlight
-  "h" '(:which-key "Highlight")
-  "hh" '(highlight-symbol :which-key "Symbol")
-  "hn" '(highlight-symbol-next :which-key "Next")
-  "hp" '(highlight-symbol-prev :which-key "Prev")
-  "hr" '(highlight-symbol-query-replace :which-key "QueryReplace")
-
-  ; Dirs
-  "g" '(:which-key "Dir")
-  "go" '(org-mode-open-dir :which-key "Org")
-  "ge" (lambda () (interactive) (open-dir "~/.emacs.d/")
-        :which-key "Emacs")
-  ; Work
-  "gw" (lambda () (interactive) (open-dir (concat org-mode-dir "/work/xplm"))
-        :which-key "Work")
-
-  ; Files
-  "f" '(:which-key "File")
-  ; Work
-  "fww" (lambda () (interactive) (find-file (concat org-mode-dir "/work/xplm/xplm.org"))
-          :which-key "Work")
-  ; Work TimeTracking
-  "fwt" (lambda () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org"))
-          :which-key "Work TimeTracking")
+(defun add-keys-to-mode (mode keys)
+  (apply 'general-define-key (append '(
+  :keymaps mode
+  :prefix "SPC")
+  keys
+  ))
 )
 
+(defun open-dir-emacs-d () (interactive) (open-dir "~/.emacs.d/"))
+(defun open-dir-work () (interactive) (open-dir (concat org-mode-dir "/work/xplm")))
+(defun open-file-work () (interactive) (find-file (concat org-mode-dir "/work/xplm/xplm.org")))
+(defun open-file-work-time () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org")))
+(general-def ranger-mode-map
+ :prefix "SPC SPC"
+ ; Dirs
+ "g" '(:which-key "Dir")
+ "go" '(org-mode-open-dir :which-key "Org")
+ "ge" '(open-dir-emacs-d :which-key "Emacs")
+ "gw" '(open-dir-work :which-key "Work")
+
+ ; Files
+ "f" '(:which-key "File")
+ "fw" '(:which-key "Work")
+ "fww" '(open-file-work :which-key "Work")
+ "fwt" '(open-file-work-time :which-key "Time-Tracking")
+)
+(add-keys-to-mode ranger-mode-map window-keys)
+(add-keys-to-mode ranger-mode-map buffer-keys)
+(add-keys-to-mode ranger-mode-map misc-keys)
