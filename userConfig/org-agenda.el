@@ -53,8 +53,10 @@
 ;;;;;;;;;;;;;;;;;;
 ;; Super-Agenda ;;
 ;;;;;;;;;;;;;;;;;;
-(org-super-agenda-mode)
 
+(defun super-agenda-run (view)
+(interactive)
+(org-super-agenda-mode)
 (let ((org-super-agenda-groups '( ;; Each group has an implicit boolean OR operator between its selectors.
                                  (:name "Today"
                                         ; Optionally specify section name :time-grid t
@@ -72,8 +74,18 @@
                                               ;; are displayed lowest-number-first.
                                               :order 1)
                                  )))
-  (org-agenda nil "gw"))
+  (org-agenda nil view))
+)
 
+(defun super-agenda-run-work ()
+(interactive)
+(super-agenda-run "gw"))
+(defun super-agenda-run-home ()
+(interactive)
+(super-agenda-run "gh"))
+(defun super-agenda-run-jw ()
+(interactive)
+(super-agenda-run "gj"))
 
 ;;;;;;;;;;;;;
 ;; Capture ;;

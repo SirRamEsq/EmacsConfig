@@ -95,6 +95,9 @@
 (load-user-config-file "variables.el")
 (load-user-config-file "OS_SPECIFIC.el")
 
+(load-user-config-file "org.el")
+(load-user-config-file "org-agenda.el")
+
 (load-user-config-file "projectile.el")
 (load-user-config-file "evil.el")
 ;(load-user-config-file "key-config.el")
@@ -118,8 +121,6 @@
 ;;(load-user-config-file "dashboard.el")
 
 ; Languages
-(load-user-config-file "org.el")
-(load-user-config-file "org-agenda.el")
 (load-user-config-file "go.el")
 (load-user-config-file "godot.el")
 (load-user-config-file "indentation.el")
