@@ -1,4 +1,6 @@
 (require 'general)
+(require 'srefactor)
+(require 'srefactor-lisp)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; DEFINE FUNCTIONS ;;
@@ -14,18 +16,22 @@
            (insert (current-kill 0)))))
 
 (defun toggle-transparency ()
-   (interactive)
-   (let ((alpha (frame-parameter nil 'alpha)))
-     (set-frame-parameter
-      nil 'alpha
-      (if (eql (cond ((numberp alpha) alpha)
-                     ((numberp (cdr alpha)) (cdr alpha))
-                     ;; Also handle undocumented (<active> <inactive>) form.
-                     ((numberp (cadr alpha)) (cadr alpha)))
-               100)
-          '(85 . 50) '(100 . 100)))))
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter nil
+                         'alpha
+                         (if (eql (cond
+                                   ((numberp alpha) alpha)
+                                   ((numberp (cdr alpha))
+                                    (cdr alpha))
+                                   ;; Also handle undocumented (<active> <inactive>) form.
+                                   ((numberp (cadr alpha))
+                                    (cadr alpha)))
+                                  100)
+                             '(85 . 50)
+                           '(100 . 100)))))
 
-(defun org-mode-open-and-refile()
+(defun org-mode-open-and-refile ()
   (interactive)
   (find-file org-mode-refile-file)
   (org-refile))
@@ -61,6 +67,14 @@
   "ld" (counsel-yank-pop :which-key "KillRing")
   "lt" (counsel-load-theme :which-key "Themes")
   "lk" (counsel-descbinds :which-key "Keys")))
+
+(defconst refactor-keys
+ '("r" (:which-key "Refactor")
+  "rl" (:which-key "Lisp")
+  "rlo" (srefactor-lisp-one-line :which-key "Line")
+  "rlm" (srefactor-lisp-format-sexp :which-key "SExp")
+  "rld" (srefactor-lisp-format-defun :which-key "Defun")
+  "rlb" (srefactor-lisp-format-buffer :which-key "Buffer")))
 
 (defconst find-keys
  '("f" (:which-key "Find")
@@ -126,6 +140,7 @@
 (add-keys-to-evil snippet-keys)
 (add-keys-to-evil buffer-keys)
 (add-keys-to-evil list-keys)
+(add-keys-to-evil refactor-keys)
 (add-keys-to-evil find-keys)
 ;(add-keys-to-evil highlight-keys)
 (add-keys-to-evil misc-keys)
