@@ -3,53 +3,78 @@
 ;;;;;;;;;;;;
 ;; Agenda ;;
 ;;;;;;;;;;;;
-;(setq org-agenda-files (list (concat org-mode-dir "/agenda")))
-
-;(setq org-agenda-custom-commands '(("g" . "GTD contexts")
-                                   ;("gh" "Home" tags-todo "@HOME")
-                                   ;("gj" "JW" tags-todo "@JW")
-                                   ;("gw" "Work"
-                                    ;tags-todo
-                                    ;"@WORK"
-                                    ;;; todos sorted by context
-                                    ;((org-agenda-prefix-format "[%b]\n  ")
-                                     ;(org-agenda-sorting-strategy '(tag-up priority-down))
-                                     ;(org-agenda-todo-keyword-format "%-1s")
+(setq org-agenda-files (list (concat org-mode-dir "/agenda")))
+; Hide these tags
+(setq org-agenda-hide-tags-regexp
+        (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@WORK"))
+(setq org-agenda-custom-commands '(("g" . "GTD contexts")
+                                   ("gh" "Home" tags-todo "@HOME")
+                                   ("gj" "JW" tags-todo "@JW")
+                                   ("gw" "Work"
+                                    tags-todo
+                                    "@WORK"
+                                        ; todos sorted by context
+                                    ((org-agenda-prefix-format "")
+                                     (org-agenda-sorting-strategy '(tag-up priority-down))
+                                     (org-agenda-todo-keyword-format "%-1s"))
                                      ;(org-agenda-overriding-header "Work Tasks\n"))
-                                    ;((org-agenda-with-colors t)
-                                     ;(org-agenda-compact-blocks t)
-                                     ;(org-agenda-remove-tags t)
-                                     ;))
-                                   ;("P" "Printed agenda"
-                                    ;((agenda ""
-                                             ;((org-agenda-span 7) ;; overview of appointments
-                                              ;(org-agenda-start-on-weekday nil) ;; calendar begins today
-                                              ;(org-agenda-repeating-timestamp-show-all t)
-                                              ;(org-agenda-entry-types '(:timestamp :sexp))))
-                                     ;(agenda ""
-                                             ;((org-agenda-span 1) ; daily agenda
-                                              ;(org-deadline-warning-days 7) ; 7 day advanced warning for deadlines
-                                              ;(org-agenda-todo-keyword-format "[ ]")
-                                              ;(org-agenda-scheduled-leaders '("" ""))
-                                              ;(org-agenda-prefix-format "%t%s")))
-                                     ;(todo "TODO"
+                                    ((org-agenda-with-colors t)
+                                     (org-agenda-compact-blocks t)
+                                     (org-agenda-remove-tags t)
+                                     )
+                                    ("~/agenda-work.html"))
+                                   ("P" "Printed agenda"
+                                    ((agenda ""
+                                             ((org-agenda-span 7) ;; overview of appointments
+                                              (org-agenda-start-on-weekday nil) ;; calendar begins today
+                                              (org-agenda-repeating-timestamp-show-all t)
+                                              (org-agenda-entry-types '(:timestamp :sexp))))
+                                     (agenda ""
+                                             ((org-agenda-span 1) ; daily agenda
+                                              (org-deadline-warning-days 7) ; 7 day advanced warning for deadlines
+                                              (org-agenda-todo-keyword-format "[ ]")
+                                              (org-agenda-scheduled-leaders '("" ""))
+                                              (org-agenda-prefix-format "%t%s")))
+                                     (todo "TODO"
                                            ;;; todos sorted by context
-                                           ;((org-agenda-prefix-format "[ ] %T: ")
-                                            ;(org-agenda-sorting-strategy '(tag-up priority-down))
-                                            ;(org-agenda-todo-keyword-format "")
-                                            ;(org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
-                                    ;((org-agenda-with-colors nil)
-                                     ;(org-agenda-compact-blocks t)
-                                     ;(org-agenda-remove-tags t)
-                                     ;(ps-number-of-columns 2)
-                                     ;(ps-landscape-mode t))
-                                    ;("~/agenda.ps"))
+                                           ((org-agenda-prefix-format "[ ] %T: ")
+                                            (org-agenda-sorting-strategy '(tag-up priority-down))
+                                            (org-agenda-todo-keyword-format "")
+                                            (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
+                                    ((org-agenda-with-colors nil)
+                                     (org-agenda-compact-blocks t)
+                                     (org-agenda-remove-tags t)
+                                     (ps-number-of-columns 2)
+                                     (ps-landscape-mode t))
+                                    )
                                    ;; other commands go here
-                                   ;))
+                                   ))
 
 ;;;;;;;;;;;;;;;;;;
 ;; Super-Agenda ;;
 ;;;;;;;;;;;;;;;;;;
+(org-super-agenda-mode)
+
+(let ((org-super-agenda-groups '( ;; Each group has an implicit boolean OR operator between its selectors.
+                                 (:name "Today"
+                                        ; Optionally specify section name :time-grid t
+                                        :todo "TODAY") ; Items that have this TODO keyword
+                                 (:name "Important"
+                                        ;; Single arguments given alone :tag "bills"
+                                        :priority "A")
+                                 (:name "Project"
+                                        ;; Single arguments given alone :tag "bills"
+                                        :auto-property "PROJECT")
+                                 (:todo "WAITING" :order 8) ; Set order of this section
+                                 (:priority<= "B"
+                                              ;; Show this section after "Today" and "Important", because
+                                              ;; their order is unspecified, defaulting to 0. Sections
+                                              ;; are displayed lowest-number-first.
+                                              :order 1)
+                                 )))
+  (org-agenda nil "gw"))
+
+
 ;;;;;;;;;;;;;
 ;; Capture ;;
 ;;;;;;;;;;;;;
