@@ -4,10 +4,13 @@
 ;; Agenda ;;
 ;;;;;;;;;;;;
 (setq org-agenda-files (list (concat org-mode-dir "/agenda")))
-; Hide these tags
-(setq org-agenda-hide-tags-regexp
-        (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@WORK"))
+(setq org-columns-default-format
+      "%TODO %40ITEM(Task) %3PRIORITY %DEADLINE")
+                                        ; Hide these tags
+(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@WORK"))
 (setq org-agenda-custom-commands '(("g" . "GTD contexts")
+                                   ("ga" "All" todo ""
+                                    )
                                    ("gh" "Home" tags-todo "@HOME")
                                    ("gj" "JW" tags-todo "@JW")
                                    ("gw" "Work"
@@ -17,11 +20,10 @@
                                     ((org-agenda-prefix-format "")
                                      (org-agenda-sorting-strategy '(tag-up priority-down))
                                      (org-agenda-todo-keyword-format "%-1s"))
-                                     ;(org-agenda-overriding-header "Work Tasks\n"))
+                                        ;(org-agenda-overriding-header "Work Tasks\n"))
                                     ((org-agenda-with-colors t)
                                      (org-agenda-compact-blocks t)
-                                     (org-agenda-remove-tags t)
-                                     )
+                                     (org-agenda-remove-tags t))
                                     ("~/agenda-work.html"))
                                    ("P" "Printed agenda"
                                     ((agenda ""
@@ -36,7 +38,7 @@
                                               (org-agenda-scheduled-leaders '("" ""))
                                               (org-agenda-prefix-format "%t%s")))
                                      (todo "TODO"
-                                           ;;; todos sorted by context
+;;; todos sorted by context
                                            ((org-agenda-prefix-format "[ ] %T: ")
                                             (org-agenda-sorting-strategy '(tag-up priority-down))
                                             (org-agenda-todo-keyword-format "")
@@ -45,8 +47,7 @@
                                      (org-agenda-compact-blocks t)
                                      (org-agenda-remove-tags t)
                                      (ps-number-of-columns 2)
-                                     (ps-landscape-mode t))
-                                    )
+                                     (ps-landscape-mode t)))
                                    ;; other commands go here
                                    ))
 
@@ -55,37 +56,35 @@
 ;;;;;;;;;;;;;;;;;;
 
 (defun super-agenda-run (view)
-(interactive)
-(org-super-agenda-mode)
-(let ((org-super-agenda-groups '( ;; Each group has an implicit boolean OR operator between its selectors.
-                                 (:name "Today"
-                                        ; Optionally specify section name :time-grid t
-                                        :todo "TODAY") ; Items that have this TODO keyword
-                                 (:name "Important"
-                                        ;; Single arguments given alone :tag "bills"
-                                        :priority "A")
-                                 (:name "Project"
-                                        ;; Single arguments given alone :tag "bills"
-                                        :auto-property "PROJECT")
-                                 (:todo "WAITING" :order 8) ; Set order of this section
-                                 (:priority<= "B"
-                                              ;; Show this section after "Today" and "Important", because
-                                              ;; their order is unspecified, defaulting to 0. Sections
-                                              ;; are displayed lowest-number-first.
-                                              :order 1)
-                                 )))
-  (org-agenda nil view))
-)
+  (interactive)
+  (org-super-agenda-mode)
+  (let ((org-super-agenda-groups '( ;; Each group has an implicit boolean OR operator between its selectors.
+                                   ;(:name "Today" :time-grid t
+                                          ;:scheduled today)
+                                   (:name "Important" :priority "A")
+                                   (:name "Overdue" :deadline past)
+                                   (:name "Due soon" :deadline future)
+                                   (:name "Project" :auto-property "PROJECT")
+                                   (:todo "WAITING" :order 8) ; Set order of this section
+                                   (:priority<= "B"
+                                                ;; Show this section after "Today" and "Important", because
+                                                ;; their order is unspecified, defaulting to 0. Sections
+                                                ;; are displayed lowest-number-first.
+                                                :order 1))))
+    (org-agenda nil view)))
 
 (defun super-agenda-run-work ()
-(interactive)
-(super-agenda-run "gw"))
+  (interactive)
+  (super-agenda-run "gw"))
 (defun super-agenda-run-home ()
-(interactive)
-(super-agenda-run "gh"))
+  (interactive)
+  (super-agenda-run "gh"))
 (defun super-agenda-run-jw ()
-(interactive)
-(super-agenda-run "gj"))
+  (interactive)
+  (super-agenda-run "gj"))
+(defun super-agenda-run-all ()
+  (interactive)
+  (super-agenda-run "ga"))
 
 ;;;;;;;;;;;;;
 ;; Capture ;;

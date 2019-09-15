@@ -86,6 +86,7 @@
    "oc" (org-capture :which-key "Capture")
    "ow" (org-mode-open-and-refile :which-key "Refile")
    "ol" (org-store-link :which-key "StoreLink")
+   "oi" (org-insert-link :which-key "InsertLink")
    "oo" (org-open-at-point :which-key "OpenLink")))
 
 (defconst highlight-keys
@@ -121,6 +122,7 @@
  "<f12> w" '(super-agenda-run-work :which-key "Work")
  "<f12> h" '(super-agenda-run-home :which-key "Home")
  "<f12> j" '(super-agenda-run-jw :which-key "JW")
+ "<f12> a" '(super-agenda-run-all :which-key "All")
  "C-<f1>" '(org-mode-open-dir :which-key "OpenOrg")
  "M-n" '(org-mode-daily-file-open :which-key "Note")
  "C-x C-e" '(fc-eval-and-replace :which-key "EvalReplace")
@@ -145,6 +147,7 @@
 (add-keys-to-evil list-keys)
 (add-keys-to-evil refactor-keys)
 (add-keys-to-evil find-keys)
+(add-keys-to-evil org-keys)
 ;(add-keys-to-evil highlight-keys)
 (add-keys-to-evil misc-keys)
 
