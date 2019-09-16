@@ -5,6 +5,11 @@
 
 ; Give us back Ctrl+U for vim emulation
 (setq evil-want-C-u-scroll t)
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
 
 ; Enable searching with "*" and "#" from visual mode
 (add-to-list 'load-path "~/.emacs.d/packages/evil-visualstar/")
