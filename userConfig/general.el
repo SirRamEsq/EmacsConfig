@@ -121,6 +121,7 @@
  "<f12>" '(:which-key "Agenda")
  "<f12> w" '(super-agenda-run-work :which-key "Work")
  "<f12> h" '(super-agenda-run-home :which-key "Home")
+ "<f12> p" '(super-agenda-run-personal :which-key "Personal")
  "<f12> j" '(super-agenda-run-jw :which-key "JW")
  "<f12> a" '(super-agenda-run-all :which-key "All")
  "C-<f1>" '(org-mode-open-dir :which-key "OpenOrg")
