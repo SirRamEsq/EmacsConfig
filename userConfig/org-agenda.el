@@ -1,6 +1,12 @@
 (require 'org-agenda)
 (require 'ts)
 
+(require 'org-capture)
+(require 'org-protocol)
+(setq org-protocol-default-template-key "l")
+;(with-eval-after-load 'org
+  ;(add-to-list 'org-modules 'org-protocol t))
+
 ;;;;;;;;;;;;
 ;; Agenda ;;
 ;;;;;;;;;;;;
@@ -95,36 +101,34 @@
 (setq org-default-notes-file org-mode-refile-file)
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
-(setq org-capture-templates (quote (("t" "todo"
-                                     entry
+(setq org-capture-templates (quote (("t" "todo" entry
                                      (file org-mode-refile-file)
                                      "* TODO %?\n%U\n%a\n")
-                                    ("b" "respond"
-                                     entry
+                                    ("b" "respond" entry
                                      (file org-mode-refile-file)
                                      "* NEXT Respond to %?\n%U\n%a\n")
-                                    ("n" "note"
-                                     entry
+                                    ("n" "note" entry
                                      (file org-mode-refile-file)
                                      "* %? :NOTE:\n%U\n%a\n")
-                                    ("j" "Journal"
-                                     entry
+                                    ("j" "Journal" entry
                                      (file+datetree org-mode-daily-file)
                                      "* %?\n%U\n")
-                                    ("m" "Meeting"
-                                     entry
+                                    ("m" "Meeting" entry
                                      (file org-mode-refile-file)
                                      "* MEETING with %? :MEETING:\n%U")
-                                    ("r" "RV"
-                                     entry
+                                    ("r" "RV" entry
                                      (file org-mode-refile-file)
                                      "* RV with %? :RV:\nSCHEDULED:\n%a\n")
-                                    ("p" "Phone call"
-                                     entry
+                                    ("P" "Phone call" entry
                                      (file org-mode-refile-file)
                                      "* PHONE %? :PHONE:\n%U")
-                                    ("h" "Habit"
-                                     entry
+                                    ("p" "Protocol" entry
+                                     (file+headline org-mode-refile-file "Protocols")
+                                     "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+                                    ("L" "Protocol Link" entry
+                                     (file+headline org-mode-refile-file "Protocol Links")
+                                      "* %? [[%:link][%:description]] \nCaptured On: %U")
+                                    ("h" "Habit" entry
                                      (file org-mode-refile-file)
                                      "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 

@@ -182,6 +182,12 @@
  "fw" '(:which-key "Work")
  "fww" '(open-file-work :which-key "Work")
  "fwt" '(open-file-work-time :which-key "Time-Tracking")
+
+ ; Open Selected
+ "o" '(:which-key "Open")
+ "oe" '(xah-show-in-desktop :which-key "Explorer")
+ "ot" '(xah-open-in-terminal :which-key "Terminal")
+ "oa" '(xah-open-in-external-app :which-key "Application")
 )
 (add-keys-to-mode ranger-mode-map window-keys)
 (add-keys-to-mode ranger-mode-map buffer-keys)
