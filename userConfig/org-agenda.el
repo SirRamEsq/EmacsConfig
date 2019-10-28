@@ -25,7 +25,10 @@
                                      (tags-todo "@HOME")))
                                    ("gp" "Personal"
                                     ((agenda "")
-                                     (tags-todo "-@WORK")))
+                                     (tags-todo "-@WORK -@LOUIE")))
+                                   ("gl" "Louie"
+                                    ((agenda "")
+                                     (tags-todo "@LOUIE")))
                                    ("gj" "JW"
                                     ((agenda "")
                                      (tags-todo "@JW")))
@@ -87,6 +90,9 @@
 (defun super-agenda-run-personal ()
   (interactive)
   (super-agenda-run "gp"))
+(defun super-agenda-run-Louie ()
+  (interactive)
+  (super-agenda-run "gl"))
 (defun super-agenda-run-jw ()
   (interactive)
   (super-agenda-run "gj"))
