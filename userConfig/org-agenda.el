@@ -25,7 +25,7 @@
                                      (tags-todo "@HOME")))
                                    ("gp" "Personal"
                                     ((agenda "")
-                                     (tags-todo "-@WORK -@LOUIE")))
+                                     (tags-todo "-@WORK-@LOUIE")))
                                    ("gl" "Louie"
                                     ((agenda "")
                                      (tags-todo "@LOUIE")))
