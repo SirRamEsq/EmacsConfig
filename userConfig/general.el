@@ -90,11 +90,11 @@
    "oo" (org-open-at-point :which-key "OpenLink")))
 
 (defconst highlight-keys
- '("h" '(:which-key "Highlight")
-   "hh" '(highlight-symbol :which-key "Symbol")
-   "hn" '(highlight-symbol-next :which-key "Next")
-   "hp" '(highlight-symbol-prev :which-key "Prev")
-   "hr" '(highlight-symbol-query-replace :which-key "QueryReplace")))
+ '("h" (:which-key "Highlight")
+   "hh" (highlight-symbol :which-key "Symbol")
+   "hn" (highlight-symbol-next :which-key "Next")
+   "hp" (highlight-symbol-prev :which-key "Prev")
+   "hr" (highlight-symbol-query-replace :which-key "QueryReplace")))
 
 (defconst misc-keys
  '("t" (toggle-transparency :which-key "Transparency")
@@ -150,7 +150,7 @@
 (add-keys-to-evil refactor-keys)
 (add-keys-to-evil find-keys)
 (add-keys-to-evil org-keys)
-;(add-keys-to-evil highlight-keys)
+(add-keys-to-evil highlight-keys)
 (add-keys-to-evil misc-keys)
 
 ;;;;;;;;;;;;;;;;;;;
