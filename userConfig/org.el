@@ -6,6 +6,8 @@
 
 ;; Load ODT backend to allow for exporting to open document format.
 (require 'ox-odt)
+;; Prefer outputting to docx
+(setq org-odt-preferred-output-format "docx")
 
 ;; indent orgmode files by default
 (setq-default org-startup-indented t)
