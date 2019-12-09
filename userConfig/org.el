@@ -4,6 +4,9 @@
 (require 'org-bullets)
 (require 'org)
 
+;; Load ODT backend to allow for exporting to open document format.
+(require 'ox-odt)
+
 ;; indent orgmode files by default
 (setq-default org-startup-indented t)
 

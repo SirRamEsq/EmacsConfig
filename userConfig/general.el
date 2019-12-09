@@ -97,7 +97,7 @@
    "hr" (highlight-symbol-query-replace :which-key "QueryReplace")))
 
 (defconst misc-keys
- '("t" (toggle-transparency :which-key "Transparency")
+ '("T" (toggle-transparency :which-key "Transparency")
    "x" (counsel-M-x :which-key "M-x")
    "p" (projectile-command-map :which-key "Projectile")
    "-" (text-scale-decrease :which-key "TextDecrease")
