@@ -53,7 +53,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (git-gutter+ counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -122,6 +122,7 @@
 (load-user-config-file "origami.el")
 (load-user-config-file "beacon.el")
 (load-user-config-file "tags.el")
+(load-user-config-file "gitgutterplus.el")
 ;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
 

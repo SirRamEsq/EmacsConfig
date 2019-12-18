@@ -96,6 +96,14 @@
    "hp" (highlight-symbol-prev :which-key "Prev")
    "hr" (highlight-symbol-query-replace :which-key "QueryReplace")))
 
+(defconst git-keys
+ '("g" (:which-key "Git")
+   "gs" (magit-status :which-key "Status")
+   "gc" (magit-commit :which-key "Commit")
+   "gp" (magit-push :which-key "Push")
+   "gj" (git-gutter+-next-hunk :which-key "Next")
+   "gk" (git-gutter+-previous-hunk :which-key "Prev")))
+
 (defconst misc-keys
  '("T" (toggle-transparency :which-key "Transparency")
    "x" (counsel-M-x :which-key "M-x")
@@ -151,6 +159,7 @@
 (add-keys-to-evil find-keys)
 (add-keys-to-evil org-keys)
 (add-keys-to-evil highlight-keys)
+(add-keys-to-evil git-keys)
 (add-keys-to-evil misc-keys)
 
 ;;;;;;;;;;;;;;;;;;;
