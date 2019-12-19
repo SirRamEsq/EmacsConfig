@@ -112,6 +112,10 @@
    "+" (text-scale-increase :which-key "TextIncrease")
    "ad" (deer :which-key "Deer")))
 
+(defconst evil-normal-mode-keys
+ '("C-a" (evil-numbers/inc-at-pt :which-key "Increment")
+   "C-x" (evil-numbers/dec-at-pt :which-key "Decrement")))
+
 ;;;;;;;;;;;;
 ;; GLOBAL ;;
 ;;;;;;;;;;;;
@@ -151,6 +155,12 @@
   keys
   ))
 )
+(defun add-keys-to-evil-normal (keys)
+ (apply 'general-define-key (append '(
+  :states (normal))
+  keys
+  ))
+)
 (add-keys-to-evil window-keys)
 (add-keys-to-evil snippet-keys)
 (add-keys-to-evil buffer-keys)
@@ -161,6 +171,7 @@
 (add-keys-to-evil highlight-keys)
 (add-keys-to-evil git-keys)
 (add-keys-to-evil misc-keys)
+(add-keys-to-evil-normal evil-normal-mode-keys)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; MODE SPECIFIC ;;

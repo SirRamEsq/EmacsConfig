@@ -9,6 +9,7 @@
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
 (require 'evil-org-agenda)
+(require 'evil-numbers)
 (evil-org-agenda-set-keys)
 
 ; Enable searching with "*" and "#" from visual mode
