@@ -74,11 +74,14 @@
                                    (:name "Project" :auto-property "PROJECT")
                                    (:todo "WAITING" :order 8) ; Set order of this section
                                    (:name "Due Eventually" :order 100 :deadline future)
-                                   (:priority<= "B"
+                                   (:priority "B"
                                                 ;; Show this section after "Today" and "Important", because
                                                 ;; their order is unspecified, defaulting to 0. Sections
                                                 ;; are displayed lowest-number-first.
-                                                :order 1))))
+                                                :order 1)
+                                   (:priority "C" :order 200)
+                                   (:name "Category" :auto-property "CATEGORY" :order 250)
+				   )))
     (org-agenda nil view)))
 
 (defun super-agenda-run-work ()
