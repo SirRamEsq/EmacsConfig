@@ -104,6 +104,7 @@
 
 (load-user-config-file "projectile.el")
 (load-user-config-file "evil.el")
+(load-user-config-file "company.el")
 ;(load-user-config-file "key-config.el")
 (load-user-config-file "general.el")
 (load-user-config-file "ivy.el")
@@ -121,7 +122,7 @@
 (load-user-config-file "darkroom.el")
 (load-user-config-file "origami.el")
 (load-user-config-file "beacon.el")
-(load-user-config-file "tags.el")
+;(load-user-config-file "tags.el")
 (load-user-config-file "gitgutterplus.el")
 ;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
@@ -133,24 +134,6 @@
 (load-user-config-file "indentation.el")
 
 (load-user-config-file "wttrin.el")
-
-
-
-;;;;;;;;;;;;;;;;;;;
-;; Auto-complete ;;
-;;;;;;;;;;;;;;;;;;;
-;; Enable Auto-complete globally
-(add-hook 'after-init-hook 'global-company-mode)
-
-(setq-default company-idle-delay 0)
-; Show suggestions after entering characters
-(setq-default company-minimum-prefix-length 2)
-(setq-default company-selection-wrap-around t)
-; Use tab key to cycle through suggestions.
-; ('tng' means 'tab and go')
-(company-tng-configure-default)
-
-
 
 
 (custom-set-faces
