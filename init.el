@@ -49,11 +49,12 @@
  '(custom-safe-themes
    (quote
     ("645599a2aab022fd7677124515a3104a60ba64d2cafdd77a6e7703f8ae97250c" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "0effdff4be43fd2a90f6bea0ea9abd67f105f15df11045bb5ecd253207d0c9cc" default)))
+ '(git-gutter:handled-backends (quote (git svn)))
  '(linum-format " %7i ")
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (evil-numbers git-gutter+ counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (git-gutter evil-numbers counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -123,7 +124,7 @@
 (load-user-config-file "origami.el")
 (load-user-config-file "beacon.el")
 ;(load-user-config-file "tags.el")
-(load-user-config-file "gitgutterplus.el")
+(load-user-config-file "gitgutter.el")
 ;;(load-user-config-file "centaurTabs.el")
 ;;(load-user-config-file "dashboard.el")
 
