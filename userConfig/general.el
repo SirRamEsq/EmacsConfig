@@ -129,6 +129,7 @@
  "<f2>" '(split-window-right :which-key "Split-Right")
  "<f3>" '(split-window-below :which-key "Split-Below")
  "<f4>" '(open-buffer-path :which-key "OpenBufferPath")
+ "<f5>" '(flycheck-mode :which-key "Split-Below")
  "<f9>" '(compile :which-key "Compile")
  "<f12>" '(:which-key "Agenda")
  "<f12> w" '(super-agenda-run-work :which-key "Work")

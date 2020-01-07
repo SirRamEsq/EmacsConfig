@@ -135,6 +135,7 @@
 (load-user-config-file "indentation.el")
 
 (load-user-config-file "wttrin.el")
+(load-user-config-file "flymake-lua.el")
 
 
 (custom-set-faces
@@ -147,6 +148,8 @@
  '(centaur-tabs-selected-modified ((t (:inherit tabbar-selected-modified))))
  '(centaur-tabs-unselected ((t (:inherit tabbar-unselected))))
  '(centaur-tabs-unselected-modified ((t (:inherit tabbar-unselected-modified))))
+ '(flymake-errline ((t (:underline "red"))) t)
+ '(flymake-warnline ((t (:underline "yellow"))) t)
  '(rainbow-delimiters-depth-1-face ((t (:foreground "dark orange"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "deep pink"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "chartreuse"))))
