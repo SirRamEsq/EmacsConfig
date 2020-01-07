@@ -135,7 +135,7 @@
 (load-user-config-file "indentation.el")
 
 (load-user-config-file "wttrin.el")
-(load-user-config-file "flymake-lua.el")
+;;(load-user-config-file "flymake-lua.el")
 
 
 (custom-set-faces
