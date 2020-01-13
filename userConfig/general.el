@@ -101,8 +101,8 @@
    "gs" (magit-status :which-key "Status")
    "gc" (magit-commit :which-key "Commit")
    "gp" (magit-push :which-key "Push")
-   "gj" (git-gutter+-next-hunk :which-key "Next")
-   "gk" (git-gutter+-previous-hunk :which-key "Prev")))
+   "gj" (git-gutter:next-hunk :which-key "Next")
+   "gk" (git-gutter:previous-hunk :which-key "Prev")))
 
 (defconst misc-keys
  '("T" (toggle-transparency :which-key "Transparency")
