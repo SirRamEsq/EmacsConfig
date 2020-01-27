@@ -11,8 +11,12 @@
 ;; Agenda ;;
 ;;;;;;;;;;;;
 (setq org-agenda-files (list (concat org-mode-dir "/agenda")))
+
+; Config guide for this variable can be found
+; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html#org0c6f806
 (setq org-columns-default-format
-      "%PROPERTY[(CATEGORY)] %TODO %3PRIORITY %40ITEM(Task) %DEADLINE")
+      ;"%PROPERTY[(CATEGORY)] %DEADLINE %SCHEDULED %TODO %3PRIORITY %40ITEM(Task)")
+      "%TODO %3PRIORITY %40ITEM(Task) %TAGS %DEADLINE %SCHEDULED")
                                         ; Hide these tags
 ;(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@WORK"))
 (setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@WORK"))
@@ -60,17 +64,23 @@
   (interactive)
   (org-super-agenda-mode)
   (let ((org-super-agenda-groups `( ;; Each group has an implicit boolean OR operator between its selectors.
-                                   ;(:name "Today" :time-grid t
-                                          ;:scheduled today)
-                                   (:name "Important" :priority "A")
-                                   (:name "Overdue" :deadline past)
-                                   (:name "Today" :deadline today)
+                                   (:name "Today" :time-grid t
+                                          :scheduled today)
                                    (:name "Due Soon"
                                           :deadline (before ,(ts-format (ts-adjust 'day 30 (ts-now))))
                                           ; Throw out these TODOs, don't pass to next filter
                                           :discard (
                                                     :deadline
                                                      (after ,(ts-format (ts-adjust 'day 30 (ts-now))))))
+                                   (:name "Scheduled Soon"
+                                          :scheduled (before ,(ts-format (ts-adjust 'day 30 (ts-now))))
+                                          ; Throw out these TODOs, don't pass to next filter
+                                          :scheduled (
+                                                    :scheduled
+                                                     (after ,(ts-format (ts-adjust 'day 30 (ts-now))))))
+                                   (:name "Important" :priority "A")
+                                   (:name "Overdue" :deadline past)
+                                   (:name "Today" :deadline today)
                                    (:name "Project" :auto-property "PROJECT")
                                    (:todo "WAITING" :order 8) ; Set order of this section
                                    (:name "Due Eventually" :order 100 :deadline future)
@@ -86,22 +96,28 @@
 
 (defun super-agenda-run-work ()
   (interactive)
-  (super-agenda-run "gw"))
+  (super-agenda-run "gw")
+  (org-agenda-columns))
 (defun super-agenda-run-home ()
   (interactive)
-  (super-agenda-run "gh"))
+  (super-agenda-run "gh")
+  (org-agenda-columns))
 (defun super-agenda-run-personal ()
   (interactive)
-  (super-agenda-run "gp"))
+  (super-agenda-run "gp")
+  (org-agenda-columns))
 (defun super-agenda-run-Louie ()
   (interactive)
-  (super-agenda-run "gl"))
+  (super-agenda-run "gl")
+  (org-agenda-columns))
 (defun super-agenda-run-jw ()
   (interactive)
-  (super-agenda-run "gj"))
+  (super-agenda-run "gj")
+  (org-agenda-columns))
 (defun super-agenda-run-all ()
   (interactive)
-  (super-agenda-run "ga"))
+  (super-agenda-run "ga")
+  (org-agenda-columns))
 
 ;;;;;;;;;;;;;
 ;; Capture ;;
