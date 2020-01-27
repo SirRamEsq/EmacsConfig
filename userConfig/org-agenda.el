@@ -10,7 +10,11 @@
 ;;;;;;;;;;;;
 ;; Agenda ;;
 ;;;;;;;;;;;;
-(setq org-agenda-files (list (concat org-mode-dir "/agenda")))
+(setq org-agenda-files (list
+                        (concat org-mode-dir "/work/xplm/projects")
+                        (concat org-mode-dir "/agenda")
+                        (concat org-mode-dir "/work/xplm/clients")
+                        ))
 
 ; Config guide for this variable can be found
 ; https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html#org0c6f806
@@ -18,8 +22,8 @@
       ;"%PROPERTY[(CATEGORY)] %DEADLINE %SCHEDULED %TODO %3PRIORITY %40ITEM(Task)")
       "%TODO %3PRIORITY %40ITEM(Task) %TAGS %DEADLINE %SCHEDULED")
                                         ; Hide these tags
-;(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@WORK"))
-(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@WORK"))
+;(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@HOME\\|@JW\\|@XPLM"))
+(setq org-agenda-hide-tags-regexp (concat org-agenda-hide-tags-regexp "@XPLM"))
 (setq org-agenda-custom-commands '(("g" . "GTD contexts")
                                    ("ga" "All"
                                     ((agenda "")
@@ -29,7 +33,7 @@
                                      (tags-todo "@HOME")))
                                    ("gp" "Personal"
                                     ((agenda "")
-                                     (tags-todo "-@WORK-@LOUIE")))
+                                     (tags-todo "-@XPLM-@LOUIE")))
                                    ("gl" "Louie"
                                     ((agenda "")
                                      (tags-todo "@LOUIE")))
@@ -39,7 +43,7 @@
                                    ("gw" "Work"
                                     ((agenda "")
                                     (tags-todo
-                                    "@WORK"
+                                    "@XPLM"
                                         ; todos sorted by context
                                     ;((org-agenda-prefix-format "")
                                      ;(org-agenda-sorting-strategy '(tag-up priority-down))
