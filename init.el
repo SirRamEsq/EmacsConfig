@@ -138,7 +138,6 @@
 (load-user-config-file "indentation.el")
 
 (load-user-config-file "wttrin.el")
-(load-user-config-file "flycheck-lua.el")
 
 
 (custom-set-faces
