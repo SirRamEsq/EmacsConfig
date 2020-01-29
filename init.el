@@ -1,3 +1,8 @@
+;; Bug fix for certain versions of emacs
+;; https://emacs.stackexchange.com/questions/51721/failed-to-download-gnu-archive
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+
 (when (>= emacs-major-version 24)
  ; Use the package manager
   (require 'package)
@@ -55,9 +60,10 @@
    (quote
     ("c:/Users/LloydRyan/Dropbox/org-mode/agenda/blockTime.org" "c:/Users/LloydRyan/Dropbox/org-mode/agenda/routine.org" "c:/Users/LloydRyan/Dropbox/org-mode/agenda/todo-archive.org" "c:/Users/LloydRyan/Dropbox/org-mode/agenda/todo-game.org" "c:/Users/LloydRyan/Dropbox/org-mode/agenda/todo.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/NDI.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/ametek.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/cubic.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/disney.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/panasonic.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/NDI.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/ametek.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/cubic.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/disney.org" "c:/Users/LloydRyan/Dropbox/org-mode/work/xplm/clients/panasonic.org")))
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
+ '(package-check-signature (quote allow-unsigned))
  '(package-selected-packages
    (quote
-    (git-gutter evil-numbers counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
+    (company-lsp gnu-elpa-keyring-update lsp-mode git-gutter evil-numbers counsel-etags counsel-bbdb wttrin lua-mode org-board json-mode stan-snippets evil-org htmlize org-super-agenda srefactor abs-mode general yasnippet-snippets ivy-yasnippet yasnippet org-bullets evil-surround which-key swiper-helm counsel-projectile counsel ivy hide-mode-line diminish spaceline beacon evil-mc multiple-cursors crux origami rainbow-delimiters highlight-symbol darkroom focus smart-mode-line-powerline-theme smart-mode-line doom-themes centaur-tabs all-the-icons page-break-lines evil-magit magit company-go flycheck keyfreq exec-path-from-shell airline-themes toml-mode helm-projectile company helm projectile org-agenda-property org-evil ranger evil-leader go-mode evil))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/auto-save/" t)
@@ -136,9 +142,9 @@
 (load-user-config-file "godot.el")
 (load-user-config-file "json.el")
 (load-user-config-file "indentation.el")
+;(load-user-config-file "lsp-mode.el")
 
 (load-user-config-file "wttrin.el")
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
