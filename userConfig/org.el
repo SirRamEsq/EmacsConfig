@@ -14,7 +14,7 @@
 
 ;; Org tags
 (setq org-tag-alist '((:startgroup . nil)
-                      ("@WORK" . ?w)
+                      ("@XPLM" . ?w)
                       ("@HOME" . ?h)
                       ("@JW" . ?j)
                       (:endgroup . nil)
