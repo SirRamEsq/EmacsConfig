@@ -136,7 +136,7 @@
 
 ; Languages
 (load-user-config-file "go.el")
-(load-user-config-file "godot.el")
+(load-user-config-file "godot2.el")
 (load-user-config-file "json.el")
 (load-user-config-file "indentation.el")
 ;(load-user-config-file "lsp-mode.el")
