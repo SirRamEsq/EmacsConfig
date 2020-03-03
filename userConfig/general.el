@@ -107,6 +107,7 @@
 (defconst misc-keys
  '("T" (toggle-transparency :which-key "Transparency")
    "x" (counsel-M-x :which-key "M-x")
+   "e" (avy-goto-char :which-key "Avy")
    "p" (projectile-command-map :which-key "Projectile")
    "-" (text-scale-decrease :which-key "TextDecrease")
    "+" (text-scale-increase :which-key "TextIncrease")
