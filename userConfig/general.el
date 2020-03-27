@@ -191,6 +191,7 @@
 (defun open-dir-emacs-d () (interactive) (open-dir "~/.emacs.d/"))
 (defun open-dir-work () (interactive) (open-dir (concat org-mode-dir "/work/xplm")))
 (defun open-file-work () (interactive) (find-file (concat org-mode-dir "/work/xplm/xplm.org")))
+(defun open-file-exercise () (interactive) (find-file (concat org-mode-dir "/lifestyle/exercise.org")))
 (defun open-file-work-time () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org")))
 (general-def ranger-mode-map
  :prefix "SPC SPC"
@@ -205,6 +206,8 @@
  "fw" '(:which-key "Work")
  "fww" '(open-file-work :which-key "Work")
  "fwt" '(open-file-work-time :which-key "Time-Tracking")
+
+ "fe" '(open-file-exercise :which-key "Exercise")
 
  ; Open Selected
  "o" '(:which-key "Open")
