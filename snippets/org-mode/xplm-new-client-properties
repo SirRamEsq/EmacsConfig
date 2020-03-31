@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: xplm-new-client-properties
+# key: xplmnc
+# --
+#+PROPERTY Customer-Name $1
+#+PROPERTY Onsite-Address $2
+#+PROPERTY PLM $3
+#+PROPERTY CAD $4
+#+PROPERTY POC $5
+#+FILETAGS: @XPLM

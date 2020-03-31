@@ -117,6 +117,11 @@
  '("C-a" (evil-numbers/inc-at-pt :which-key "Increment")
    "C-x" (evil-numbers/dec-at-pt :which-key "Decrement")))
 
+(defconst evil-insert-mode-keys
+ '("M-/" (yas-expand :which-key "YAS-expand")
+   "C-n" (yas-next-field :which-key "Decrement")))
+
+
 ;;;;;;;;;;;;
 ;; GLOBAL ;;
 ;;;;;;;;;;;;
@@ -157,12 +162,20 @@
   keys
   ))
 )
+
 (defun add-keys-to-evil-normal (keys)
  (apply 'general-define-key (append '(
   :states (normal))
   keys
   ))
-)
+ )
+
+(defun add-keys-to-evil-insert (keys)
+ (apply 'general-define-key (append '(
+  :states (insert))
+  keys
+  ))
+ )
 (add-keys-to-evil window-keys)
 (add-keys-to-evil snippet-keys)
 (add-keys-to-evil buffer-keys)
@@ -174,6 +187,7 @@
 (add-keys-to-evil git-keys)
 (add-keys-to-evil misc-keys)
 (add-keys-to-evil-normal evil-normal-mode-keys)
+(add-keys-to-evil-insert evil-insert-mode-keys)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; MODE SPECIFIC ;;
