@@ -145,6 +145,7 @@
 ;(load-user-config-file "lsp-mode.el")
 
 (load-user-config-file "wttrin.el")
+(load-user-config-file "fileAssociations.el")
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
