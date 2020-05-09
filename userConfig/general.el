@@ -207,6 +207,7 @@
 (defun open-file-work () (interactive) (find-file (concat org-mode-dir "/work/xplm/xplm.org")))
 (defun open-file-exercise () (interactive) (find-file (concat org-mode-dir "/lifestyle/exercise.org")))
 (defun open-file-work-time () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org")))
+(defun open-file-budget () (interactive) (find-file (concat org-mode-dir "/budget/2020.org")))
 (general-def ranger-mode-map
  :prefix "SPC SPC"
  ; Dirs
@@ -220,6 +221,7 @@
  "fw" '(:which-key "Work")
  "fww" '(open-file-work :which-key "Work")
  "fwt" '(open-file-work-time :which-key "Time-Tracking")
+ "fb" '(open-file-budget :which-key "Budget")
 
  "fe" '(open-file-exercise :which-key "Exercise")
 
