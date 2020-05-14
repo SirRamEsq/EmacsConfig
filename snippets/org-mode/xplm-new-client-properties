@@ -2,9 +2,37 @@
 # name: xplm-new-client-properties
 # key: xplmnc
 # --
-#+PROPERTY Customer-Name $1
-#+PROPERTY Onsite-Address $2
-#+PROPERTY PLM $3
-#+PROPERTY CAD $4
-#+PROPERTY POC $5
+#+PROPERTY Customer-Name ${1:name}
+#+PROPERTY Onsite-Address ${2:address}
+#+PROPERTY PLM ${3:plm}
+#+PROPERTY CAD ${4:cad}
+#+PROPERTY POC ${5:poc}
+#+PROPERTY ProjectType ${6:type}
 #+FILETAGS: @XPLM
+[[D:\XPLM Solution GmbH\XPLM US - Documents\_Project Folders\\$1][SharePoint Link]]
+
+$0
+
+* VPN and RDP
+- UN:
+- PW:
+- RDP:
+
+* Deliverables
+** TODO Working Altium-Info ECAD Integration
+*** TODO Get RDS to call it done
+*** TODO Test
+** Documentation
+*** TODO Send Admin and User Guide from Jenkins
+*** TODO Write install guide
+*** TODO Functional Spec
+*** TODO Customized Install Guide
+*** TODO Customized Training Guide
+*** TODO Customized Configuration Document
+** Workshops
+*** TODO Discovery
+*** TODO Training
+- [[*Customized Training Guide][Customized Training Guide]]
+- 4 Key users
+** TODO Have UAT and Review
+** TODO Golive
