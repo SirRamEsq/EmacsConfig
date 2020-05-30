@@ -208,6 +208,7 @@
 (defun open-file-exercise () (interactive) (find-file (concat org-mode-dir "/lifestyle/exercise.org")))
 (defun open-file-work-time () (interactive) (find-file (concat org-mode-dir "/work/xplm/time-tracking.org")))
 (defun open-file-budget () (interactive) (find-file (concat org-mode-dir "/budget/2020.org")))
+(defun open-file-life () (interactive) (find-file (concat org-mode-dir "/lifestyle/life.org")))
 (general-def ranger-mode-map
  :prefix "SPC SPC"
  ; Dirs
@@ -224,6 +225,7 @@
  "fb" '(open-file-budget :which-key "Budget")
 
  "fe" '(open-file-exercise :which-key "Exercise")
+ "fl" '(open-file-life :which-key "Life")
 
  ; Open Selected
  "o" '(:which-key "Open")
