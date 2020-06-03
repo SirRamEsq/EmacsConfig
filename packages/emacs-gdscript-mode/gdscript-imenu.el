@@ -1,6 +1,6 @@
 ;;; gdscript-imenu.el --- Imenu support for GDScript -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020 GDQuest, Free Software Foundation, Inc.
+;; Copyright (C) 2020 GDQuest
 
 ;; Author: Nathan Lovato <nathan@gdquest.com>, Fabián E. Gallina <fgallina@gnu.org>
 ;; URL: https://github.com/GDQuest/emacs-gdscript-mode/
@@ -29,6 +29,8 @@
 ;; current GDScript buffer.
 
 ;;; Code:
+
+(require 'gdscript-indent-and-nav)
 
 (defvar gdscript-imenu-format-item-label-function
   'gdscript-imenu-format-item-label
@@ -177,8 +179,8 @@ To this:
     (or alist
         (let* ((fn (lambda (_type name) name))
                (gdscript-imenu-format-item-label-function fn)
-              (gdscript-imenu-format-parent-item-label-function fn)
-              (gdscript-imenu-format-parent-item-jump-label-function fn))
+               (gdscript-imenu-format-parent-item-label-function fn)
+               (gdscript-imenu-format-parent-item-jump-label-function fn))
           (gdscript-imenu-create-index))))))
 
 (provide 'gdscript-imenu)

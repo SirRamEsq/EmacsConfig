@@ -1,6 +1,6 @@
 ;;; gdscript-syntax.el --- Syntax highlighting for GDScript -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020 GDQuest, Free Software Foundation, Inc.
+;; Copyright (C) 2020 GDQuest
 
 ;; Author: Nathan Lovato <nathan@gdquest.com>, Fabián E. Gallina <fgallina@gnu.org>
 ;; URL: https://github.com/GDQuest/emacs-gdscript-mode/
@@ -30,39 +30,10 @@
 
 ;;; Code:
 
-(defun gdscript--get-file-content-as-string (file-path-relative)
-  "Returns the content of a file in this package as a list of
-strings. Used to retrieve lists of keywords for syntax
-highlighting.
+(require 'cl-lib)
+(require 'gdscript-keywords)
 
-If the file isn't available, the function tries to access the
-file without the directory path. This is for compatibility with
-the Doom Emacs distribution, which flattens the package's
-structure."
-  (with-temp-buffer
-    (let (this-directory requested-path file-path)
-      (setq this-directory (file-name-directory (or load-file-name buffer-file-name)))
-      (setq requested-path (concat this-directory file-path-relative))
-      (setq file-path (if (file-readable-p requested-path)
-                          requested-path
-                        (concat this-directory
-                                (file-name-nondirectory file-path-relative))))
-      (insert-file-contents file-path)
-      (split-string (buffer-string)
-                    "\n"
-                    t))))
-
-
-(defconst gdscript-keywords (eval-when-compile (gdscript--get-file-content-as-string "data/keywords.txt")))
-(defconst gdscript-built-in-constants (eval-when-compile (gdscript--get-file-content-as-string "data/built-in-constants.txt")))
-;; Only contains types that are not classes and that the Godot editor highlights
-;; like built-in keywords
-(defconst gdscript-built-in-types (eval-when-compile (gdscript--get-file-content-as-string "data/built-in-types.txt")))
-(defconst gdscript-built-in-functions (eval-when-compile (gdscript--get-file-content-as-string "data/built-in-functions.txt")))
-;; Contains all engine classes and node types, including vectors, transforms, etc.
-(defconst gdscript-built-in-classes (eval-when-compile (gdscript--get-file-content-as-string "data/built-in-classes.txt")))
-
-(defun regex-maker (words)
+(defun gdscript-syntax-regex-maker (words)
   (regexp-opt words 'symbols))
 
 ;;; Font-lock and syntax
@@ -85,14 +56,14 @@ structure."
                       (_ form))))
 
 ;; Controls font-face mappings or colors to highlight groups of keywords
-(defvar gdscript-font-lock `((,(regex-maker gdscript-keywords)
+(defvar gdscript-font-lock `((,(gdscript-syntax-regex-maker gdscript-keywords)
                               1
                               font-lock-keyword-face)
-                             (,(regex-maker (concatenate 'list gdscript-built-in-constants
-                                                         gdscript-built-in-types gdscript-built-in-functions))
+                             (,(gdscript-syntax-regex-maker (append gdscript-built-in-constants
+                                                                    gdscript-built-in-types gdscript-built-in-functions))
                               1
                               font-lock-builtin-face)
-                             (,(regex-maker gdscript-built-in-classes)
+                             (,(gdscript-syntax-regex-maker gdscript-built-in-classes)
                               1
                               font-lock-type-face)
                              (,(rx symbol-start
@@ -104,7 +75,12 @@ structure."
                                    (or "var" "const")
                                    (1+ space)
                                    (group (1+ (or word ?_))))
-                              (1 font-lock-variable-name-face))))
+                              (1 font-lock-variable-name-face))
+                             ;; Function call
+                             (,(rx (group (1+ (or word ?_)))
+                                   (0+ space)
+                                   "(")
+                              (1 font-lock-function-name-face))))
 
 (defvar gdscript-syntax-table (make-syntax-table))
 
@@ -142,7 +118,7 @@ The type returned can be `comment', `string' or `paren'."
    ((rx (or "\"\"\"" "'''"))
     (0 (ignore (gdscript-syntax-stringify))))))
 
-(define-inline gdscript-syntax-count-quotes (quote-char &optional point limit)
+(defun gdscript-syntax-count-quotes (quote-char &optional point limit)
   "Count number of quotes around point (max is 3).
 QUOTE-CHAR is the quote char to count.  Optional argument POINT is
 the point where scan starts (defaults to current point), and LIMIT

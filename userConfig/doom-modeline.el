@@ -3,8 +3,9 @@
 ; doom themes
 ; Favorite themes
 ;(load-theme 'doom-one t)
-;(load-theme 'doom-vibrant t)
-(load-theme 'doom-molokai t)
+(load-theme 'doom-vibrant t)
+;(load-theme 'doom-molokai t)
+;(load-theme 'doom-tomorrow-day t)
 
 (doom-themes-visual-bell-config)
 (doom-themes-org-config)

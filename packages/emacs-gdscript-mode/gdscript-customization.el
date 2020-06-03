@@ -1,6 +1,6 @@
 ;;; gdscript-customization.el --- Customizable variables for the GDScript language support  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020 GDQuest, Free Software Foundation, Inc.
+;; Copyright (C) 2020 GDQuest
 
 ;; Author: Nathan Lovato <nathan@gdquest.com>
 ;; URL: https://github.com/GDQuest/emacs-gdscript-mode/
@@ -24,7 +24,7 @@
 ;; GNU General Public License for more details.
 
 ;; For a full copy of the GNU General Public License
-;; see <http://www.gnu.org/licenses/>.
+;; see <https://www.gnu.org/licenses/>.
 
 
 ;;; Commentary:
@@ -97,6 +97,34 @@ fill parens."
   :type 'symbol
   :group 'gdscript)
 
-(provide 'gdscript-customization)
+(defcustom gdscript-indent-def-block-scale 2
+  "Multiplier applied to indentation inside multi-line def blocks."
+  :version "26.1"
+  :type 'integer
+  :safe 'natnump)
 
+(defcustom gdscript-godot-executable "godot"
+  "The path to the Godot executable.
+By default, it assumes that the executable is in the system's
+PATH."
+  :type 'string
+  :group 'gdscript)
+
+(defcustom gdscript-gdformat-executable "gdformat"
+  "The path to the gdformat executable.
+By default, it assumes that the executable is in the system's
+PATH."
+  :type 'string
+  :group 'gdscript)
+
+(defcustom gdscript-docs-local-path ""
+  "Optional path to a local build of the Godot documentation.
+If not set to an empty string, the commands `gdscript-docs-browse-api'
+and `gdscript-docs-browse-symbol-at-point' allow you to browse the local files.
+Must be the root directory of the website, that is to say, a
+directory path containing the file `index.html'."
+  :type 'string
+  :group 'gdscript)
+
+(provide 'gdscript-customization)
 ;;; gdscript-customization.el ends here

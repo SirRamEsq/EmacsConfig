@@ -1,6 +1,6 @@
 ;;; gdscript-mode.el --- Major mode for Godot's GDScript language -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020 GDQuest, Free Software Foundation, Inc.
+;; Copyright (C) 2020 GDQuest
 
 ;; Author: Nathan Lovato <nathan@gdquest.com>, Fabián E. Gallina <fgallina@gnu.org>
 ;; URL: https://github.com/GDQuest/emacs-gdscript-mode/
@@ -31,6 +31,7 @@
 ;;; Code:
 
 (require 'gdscript-customization)
+(require 'gdscript-docs)
 (require 'gdscript-syntax)
 (require 'gdscript-indent-and-nav)
 (require 'gdscript-imenu)
@@ -38,6 +39,8 @@
 (require 'gdscript-completion)
 (require 'gdscript-format)
 (require 'gdscript-rx)
+(require 'gdscript-godot)
+(require 'gdscript-hydra)
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.gd\\'" . gdscript-mode))
@@ -52,11 +55,29 @@
                             (define-key map [remap forward-sentence] 'gdscript-nav-forward-block)
                             (define-key map [remap backward-up-list] 'gdscript-nav-backward-up-list)
                             (define-key map [remap mark-defun] 'gdscript-mark-defun)
-                            (define-key map "\C-c\C-j" 'imenu)
+                            (define-key map (kbd "C-c C-j") 'imenu)
                             ;; Indent specific
                             (define-key map "\177" 'gdscript-indent-dedent-line-backspace)
                             (define-key map (kbd "<backtab>") 'gdscript-indent-dedent-line)
                             (define-key map (kbd "\t") 'company-complete)
+                            ;; Insertion.
+                            (define-key map (kbd "C-c i") 'gdscript-completion-insert-file-path-at-point)
+                            ;; Formatting.
+                            (define-key map (kbd "C-c C-f r") 'gdscript-format-region)
+                            (define-key map (kbd "C-c C-f b") 'gdscript-format-buffer)
+                            ;; Run in Godot.
+                            (define-key map (kbd "C-c C-r p") 'gdscript-godot-open-project-in-editor)
+                            (define-key map (kbd "C-c C-r r") 'gdscript-godot-run-project)
+                            (define-key map (kbd "C-c C-r d") 'gdscript-godot-run-project-debug)
+                            (define-key map (kbd "C-c C-r s") 'gdscript-godot-run-current-scene)
+                            (define-key map (kbd "C-c C-r q") 'gdscript-godot-run-current-scene-debug)
+                            (define-key map (kbd "C-c C-r e") 'gdscript-godot-edit-current-scene)
+                            (define-key map (kbd "C-c C-r x") 'gdscript-godot-run-current-script)
+                            ;; Docs.
+                            (define-key map (kbd "C-c C-b a") 'gdscript-docs-browse-api)
+                            (define-key map (kbd "C-c C-b o") 'gdscript-docs-browse-symbol-at-point)
+                            ;; Hydra
+                            (define-key map (kbd "C-c r") 'gdscript-hydra-show)
                             map)
   "Keymap for `gdscript-mode'.")
 
@@ -156,7 +177,6 @@ the last command event was a string delimiter."
 
   (setq-local outline-regexp
               (gdscript-rx (* space) block-start))
-  (setq-local outline-heading-end-regexp ":[^\n]*\n")
   (setq-local outline-level
               #'(lambda ()
                   "`outline-level' function for gdscript mode."
