@@ -12,6 +12,7 @@
 ;;;;;;;;;;;;
 (setq org-agenda-files (list
                         (concat org-mode-dir "/work/xplm/projects")
+                        (concat org-mode-dir "/work/xplm/ecad")
                         (concat org-mode-dir "/work/xplm/ecad/customers")
                         (concat org-mode-dir "/agenda")
                         (concat org-mode-dir "/work/xplm/clients")
