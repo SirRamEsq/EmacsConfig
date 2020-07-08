@@ -2,12 +2,11 @@
 # name: xplm-new-client-properties
 # key: xplmnc
 # --
-#+PROPERTY Customer-Name ${1:name}
-#+PROPERTY Onsite-Address ${2:address}
-#+PROPERTY PLM ${3:plm}
-#+PROPERTY CAD ${4:cad}
-#+PROPERTY POC ${5:poc}
-#+PROPERTY ProjectType ${6:type}
+#+PROPERTY CustomerName ${1:name}
+#+PROPERTY PLM ${2:plm}
+#+PROPERTY CAD ${3:cad}
+#+PROPERTY POC ${4:poc}
+#+PROPERTY ProjectType ${5:type}
 #+FILETAGS: @XPLM
 [[D:\XPLM Solution GmbH\XPLM US - Documents\_Project Folders\\$1][SharePoint Link]]
 
