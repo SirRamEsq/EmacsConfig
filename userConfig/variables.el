@@ -6,9 +6,25 @@
   "Directory For Org-Mode daily files")
 
 (defconst org-mode-daily-file
-	(let ((daily-name (format-time-string "%Y-%m-%d")))
+	(let ((daily-name (format-time-string "%Y-%m-%d [%a]")))
 	(expand-file-name (concat org-mode-journal-dir "/" daily-name ".org")))
 	"Today's org mode journal file")
+
+(defconst org-mode-weekly-file
+	(let ((weekly-name (format-time-string "%Y-%m W%W")))
+	(expand-file-name (concat org-mode-journal-dir "/" weekly-name ".org")))
+	"Week's org mode journal file")
+
+(defconst org-mode-monthly-file
+	(let ((monthly-name (format-time-string "%Y-%m")))
+	(expand-file-name (concat org-mode-journal-dir "/" monthly-name ".org")))
+	"Month's org mode journal file")
+
+(defconst org-mode-todays-journal
+  (cond ((string= (format-time-string "%d") "1") org-mode-monthly-file)
+      ((string= (format-time-string "%A") "Monday") org-mode-weekly-file)
+      (t org-mode-daily-file))
+  "Open relevant Default Journal file for today")
 
 (defconst org-mode-refile-file
   (expand-file-name(concat org-mode-dir "/refile.org"))
@@ -17,6 +33,14 @@
 (defun org-mode-daily-file-open ()
   (interactive)
   (find-file org-mode-daily-file))
+
+(defun org-mode-weekly-file-open ()
+  (interactive)
+  (find-file org-mode-weekly-file))
+
+(defun org-mode-monthly-file-open ()
+  (interactive)
+  (find-file org-mode-monthly-file))
 
 (defun open-dir (dir)
   (find-file dir)

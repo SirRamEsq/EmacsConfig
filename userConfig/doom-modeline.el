@@ -7,6 +7,12 @@
 ;(load-theme 'doom-molokai t)
 ;(load-theme 'doom-tomorrow-day t)
 
+; Highlight color
+;(set-face-attribute 'region nil :foreground "#ffffff")
+;(set-face-attribute 'hl-line nil :background nil)
+;(set-face-background hl-line-face "gray13")
+;(setq highlight-symbol-foreground-color "#cccccc")
+
 (doom-themes-visual-bell-config)
 (doom-themes-org-config)
 

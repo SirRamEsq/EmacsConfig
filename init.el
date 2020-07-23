@@ -46,6 +46,8 @@
 ;; rest are in auto-save dir
 (setq auto-save-list-file-prefix "~/.emacs.d/")
 (custom-set-variables
+  ;; Initial Buffer
+  '(initial-buffer-choice org-mode-todays-journal)
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -146,6 +148,8 @@
 
 (load-user-config-file "wttrin.el")
 (load-user-config-file "fileAssociations.el")
+
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -145,7 +145,9 @@
  "<f12> j" '(super-agenda-run-jw :which-key "JW")
  "<f12> a" '(super-agenda-run-all :which-key "All")
  "C-<f1>" '(org-mode-open-dir :which-key "OpenOrg")
- "M-n" '(org-mode-daily-file-open :which-key "Note")
+ "M-n d" '(org-mode-daily-file-open :which-key "Today's Journal")
+ "M-n w" '(org-mode-weekly-file-open :which-key "Week's Journal")
+ "M-n m" '(org-mode-monthly-file-open :which-key "Month's Journal")
  "C-x C-e" '(fc-eval-and-replace :which-key "EvalReplace")
 )
 
