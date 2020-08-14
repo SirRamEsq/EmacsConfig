@@ -1,0 +1,27 @@
+# Any files that take the form 1232-pc-name~
+/*~
+
+# Auto save dir
+/auto-save
+
+# Backup Dir
+/backup-files
+
+# Cached Projectile data (system specific)
+/projectile.cache
+/projectile-bookmarks.eld
+
+# Recently opened files
+/recentf
+
+# ???
+/srecode-map.el
+
+# Autogen-ed by package.el (package-update-contents)
+/elpa/archives
+
+# Releated to Magit, contains history
+/transient
+
+# Contains cookies
+/url
