@@ -8,7 +8,9 @@
 #+PROPERTY POC ${4:poc}
 #+PROPERTY ProjectType ${5:type}
 #+FILETAGS: @XPLM
-[[D:\XPLM Solution GmbH\XPLM US - Documents\_Project Folders\\$1][SharePoint Link]]
+[[D:\XPLM Solution GmbH\XPLM US - Documents\_Project Folders\\$1][SharePoint Link]
+[[\\gaia\Downloadportal\downloads\Customer\\$1][Download Portal Folder]
+[[\\ajax.xplm.dd\ecad_eda\customer\\$1][RDS Build Folder]
 
 $0
 

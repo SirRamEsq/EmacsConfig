@@ -66,7 +66,7 @@
 ; Play nice with Evil
 (setq org-super-agenda-header-map (make-sparse-keymap))
 
-(defun super-agenda-run (view)
+(defun super-agenda-run-view-default (view)
   (interactive)
   (org-super-agenda-mode)
   (let ((org-super-agenda-groups `( ;; Each group has an implicit boolean OR operator between its selectors.
@@ -100,29 +100,64 @@
 				   )))
     (org-agenda nil view)))
 
+(defun super-agenda-run-view-work (view)
+  (interactive)
+  (org-super-agenda-mode)
+  (let ((org-super-agenda-groups `( ;; Each group has an implicit boolean OR operator between its selectors.
+                                   (:name "Overdue" :deadline past)
+                                   (:name "Due Today" :deadline today)
+                                   (:name "Demos" :tag "demo")
+                                   (:name "Scheduled Today" :time-grid t
+                                          :scheduled today)
+                                   (:name "Due Soon"
+                                          :deadline (before ,(ts-format (ts-adjust 'day 30 (ts-now))))
+                                          ; Throw out these TODOs, don't pass to next filter
+                                          :discard (
+                                                    :deadline
+                                                     (after ,(ts-format (ts-adjust 'day 30 (ts-now))))))
+                                   (:name "Scheduled Soon"
+                                          :scheduled (before ,(ts-format (ts-adjust 'day 30 (ts-now))))
+                                          ; Throw out these TODOs, don't pass to next filter
+                                          :scheduled (
+                                                    :scheduled
+                                                     (after ,(ts-format (ts-adjust 'day 30 (ts-now))))))
+                                   (:name "Important" :priority "A")
+                                   (:name "Project" :auto-property "PROJECT")
+                                   (:todo "WAITING" :order 8) ; Set order of this section
+                                   (:name "Category" :auto-property "CATEGORY" :order 250)
+                                   (:name "Due Eventually" :order 100 :deadline future)
+                                   (:priority "B"
+                                                ;; Show this section after "Today" and "Important", because
+                                                ;; their order is unspecified, defaulting to 0. Sections
+                                                ;; are displayed lowest-number-first.
+                                                :order 1)
+                                   (:priority "C" :order 200)
+				   )))
+    (org-agenda nil view)))
+
 (defun super-agenda-run-work ()
   (interactive)
-  (super-agenda-run "gw")
+  (super-agenda-run-view-work "gw")
   (org-agenda-columns))
 (defun super-agenda-run-home ()
   (interactive)
-  (super-agenda-run "gh")
+  (super-agenda-run-view-default "gh")
   (org-agenda-columns))
 (defun super-agenda-run-personal ()
   (interactive)
-  (super-agenda-run "gp")
+  (super-agenda-run-view-default "gp")
   (org-agenda-columns))
 (defun super-agenda-run-Louie ()
   (interactive)
-  (super-agenda-run "gl")
+  (super-agenda-run-view-default "gl")
   (org-agenda-columns))
 (defun super-agenda-run-jw ()
   (interactive)
-  (super-agenda-run "gj")
+  (super-agenda-run-view-default "gj")
   (org-agenda-columns))
 (defun super-agenda-run-all ()
   (interactive)
-  (super-agenda-run "ga")
+  (super-agenda-run-view-default "ga")
   (org-agenda-columns))
 
 ;;;;;;;;;;;;;
