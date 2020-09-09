@@ -45,45 +45,6 @@
 The name of the defun should be grouped so it can be retrieved
 via `match-string'.")
 
-;;; Indentation
-(defun gdscript-indent-guess-indent-offset ()
-  "Guess and set `gdscript-indent-offset' for the current buffer."
-  (interactive)
-  (save-excursion
-    (save-restriction
-      (widen)
-      (goto-char (point-min))
-      (let ((block-end))
-        (while (and (not block-end)
-                    (re-search-forward
-                     (gdscript-rx line-start block-start) nil t))
-          (when (and
-                 (not (gdscript-syntax-context-type))
-                 (progn
-                   (goto-char (line-end-position))
-                   (gdscript--util-forward-comment -1)
-                   (if (equal (char-before) ?:)
-                       t
-                     (forward-line 1)
-                     (when (gdscript-info-block-continuation-line-p)
-                       (while (and (gdscript-info-continuation-line-p)
-                                   (not (eobp)))
-                         (forward-line 1))
-                       (gdscript--util-forward-comment -1)
-                       (when (equal (char-before) ?:)
-                         t)))))
-            (setq block-end (point-marker))))
-        (let ((indentation
-               (when block-end
-                 (goto-char block-end)
-                 (gdscript--util-forward-comment)
-                 (current-indentation))))
-          (if (and indentation (not (zerop indentation)))
-              (set (make-local-variable 'gdscript-indent-offset) indentation)
-            (when gdscript-indent-guess-indent-offset-verbose
-              (message "Can't guess gdscript-indent-offset, using defaults: %s"
-                       gdscript-indent-offset))))))))
-
 (defun gdscript-indent-context ()
   "Get information about the current indentation context.
 Context is returned in a cons with the form (STATUS . START).
@@ -697,6 +658,19 @@ likely an invalid gdscript file."
           (setq positions (cdr positions)))))
     position))
 
+(defun gdscript-indent--nav-block ()
+  "Search backward for block start."
+  (re-search-backward (gdscript-rx block-start) nil t)
+  ;; At this point `(match-string-no-properties 0)' doesn't match whole gdscript's block expression,
+  ;; due to how `re-search-backward' works.
+  ;; To make `(match-string-no-properties 0)' match whole gdscript's block expression
+  ;; let's use `re-search-forward' from beginning of a statement.
+  (gdscript-nav-beginning-of-statement)
+  (prog1
+      (re-search-forward (gdscript-rx block-start) nil t)
+    ;; And let's put point at the beginning of the statement.
+    (gdscript-nav-beginning-of-statement)))
+
 (defun gdscript-info-dedenter-opening-block-positions ()
   "Return points of blocks the current line may close sorted by closer.
 Returns nil if point is not on a dedenter statement or no opening
@@ -714,19 +688,7 @@ likely an invalid gdscript file."
                (collected-indentations)
                (opening-blocks))
           (catch 'exit
-            (while (gdscript-nav--syntactically
-                    (lambda ()
-                      (re-search-backward (gdscript-rx block-start) nil t)
-                      ;; At this point `(match-string-no-properties 0)' doesn't match whole gdscript's block expression,
-                      ;; due to how `re-search-backward' works.
-                      ;; To make `(match-string-no-properties 0)' match whole gdscript's block expression
-                      ;; let's use `re-search-forward' from beginning of a line.
-                      (beginning-of-line)
-                      (re-search-forward (gdscript-rx block-start) nil t)
-                      ;; And let's put point at the beginning of the match.
-                      (beginning-of-line)
-                      t)
-                    #'<)
+            (while (gdscript-nav--syntactically #'gdscript-indent--nav-block #'<)
               (let ((indentation (current-indentation)))
                 (when (and (not (memq indentation collected-indentations))
                            (or (not collected-indentations)
@@ -743,7 +705,9 @@ likely an invalid gdscript file."
                                  (while (and (< (point) cur-line)
                                              (setq no-back-indent
                                                    (or (> (current-indentation) indentation)
-                                                       (gdscript-info-current-line-empty-p))))
+                                                       (gdscript-info-current-line-empty-p)
+                                                       (gdscript-info-current-line-comment-p)
+                                                       (not (equal :after-line (car (gdscript-indent-context)))))))
                                    (forward-line)))
                                no-back-indent)))
                   (setq collected-indentations
@@ -891,7 +855,7 @@ operator."
 (defun gdscript-info-current-line-comment-p ()
   "Return non-nil if current line is a comment line."
   (char-equal
-   (or (char-after (+ (line-beginning-position) (current-indentation))) ?_)
+   (or (char-after (+ (line-beginning-position) (/ (current-indentation) gdscript-indent-offset))) ?_)
    ?#))
 
 (defun gdscript-info-current-line-empty-p ()

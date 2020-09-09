@@ -97,6 +97,10 @@
 ; required for emacsclient
 (server-start)
 
+; Fixes a bug on some machines
+; https://github.com/hlissner/doom-emacs/issues/1566
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.2")
+
 ; Function to load config file from user-config-dir
 (defun load-user-config-file (file)
   (interactive "f")
@@ -140,7 +144,7 @@
 
 ; Languages
 (load-user-config-file "go.el")
-(load-user-config-file "godot2.el")
+(load-user-config-file "godot.el")
 (load-user-config-file "json.el")
 (load-user-config-file "indentation.el")
 ;(load-user-config-file "lsp-mode.el")

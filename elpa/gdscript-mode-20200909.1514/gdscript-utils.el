@@ -114,9 +114,13 @@ WARNING: the Godot project must exist for this function to work."
         (match-string 1)
       (error "Could not find the name of the project"))))
 
-(defun gdscript-util--get-godot-buffer-name ()
+(defun gdscript-util--get-godot-buffer-name (&optional editor)
   "Return buffer name for godot's stdout/stderr output."
-  (format "*godot - %s*" (gdscript-util--get-godot-project-name)))
+  (format (if editor "*godot - %s - Editor*" "*godot - %s*") (gdscript-util--get-godot-project-name)))
+
+(defun gdscript-util--get-gdformat-buffer-name ()
+  "Return buffer name for godot's stdout/stderr output."
+  (format "*gdformat - %s*" (gdscript-util--get-godot-project-name)))
 
 (defun gdscript-util--get-godot-project-file-path-relative (file-path)
   "Return the relative path of `FILE-PATH' to Godot's configuration file."
@@ -135,6 +139,20 @@ For example:
    ((null xs) nil)
    ((listp xs) (append (gdscript-util--flatten (car xs)) (gdscript-util--flatten (cdr xs))))
    (t (list xs))))
+
+(defun gdscript-util--read (items &optional prompt)
+  "Let's choose single item from ITEMS from mini-buffer.
+PROMPT is prompt for read command. Return `nil' if user aborts."
+  (let* ((p (if prompt prompt "Options"))
+    (result (cond ((and (featurep 'projectile) )
+           (projectile-completing-read (format "%s: " p) items))
+          ((fboundp 'ivy-read)
+           (ivy-read (format "%s: " p) items))
+          ((fboundp 'ido-completing-read)
+           (ido-completing-read (format "%s: " p) items))
+          (t
+           (completing-read (format "%s (hit TAB to auto-complete): " p) items nil t)))))
+    (if quit-flag nil result)))
 
 (provide 'gdscript-utils)
 

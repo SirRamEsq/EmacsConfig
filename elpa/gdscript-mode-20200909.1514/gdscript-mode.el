@@ -76,6 +76,7 @@
                             ;; Docs.
                             (define-key map (kbd "C-c C-b a") 'gdscript-docs-browse-api)
                             (define-key map (kbd "C-c C-b o") 'gdscript-docs-browse-symbol-at-point)
+                            (define-key map (kbd "C-c C-b s") 'gdscript-docs-online-search-api)
                             ;; Hydra
                             (define-key map (kbd "C-c r") 'gdscript-hydra-show)
                             map)
@@ -110,9 +111,9 @@ the last command event was a string delimiter."
   (setq-local tab-width gdscript-tab-width)
   (setq-local indent-tabs-mode gdscript-use-tab-indents)
 
-  (set-syntax-table gdscript-syntax-table)
-  (modify-syntax-entry ?\# "\<" gdscript-syntax-table)
-  (modify-syntax-entry ?\n ">" gdscript-syntax-table)
+  (set-syntax-table gdscript-mode-syntax-table)
+  (modify-syntax-entry ?\# "\<" gdscript-mode-syntax-table)
+  (modify-syntax-entry ?\n ">" gdscript-mode-syntax-table)
 
   (setq-local comment-start "# ")
   (setq-local comment-start-skip "#+\\s-*")
@@ -180,10 +181,7 @@ the last command event was a string delimiter."
   (setq-local outline-level
               #'(lambda ()
                   "`outline-level' function for gdscript mode."
-                  (1+ (/ (current-indentation) gdscript-indent-offset))))
-
-  (when gdscript-indent-guess-indent-offset
-    (gdscript-indent-guess-indent-offset)))
+                  (1+ (/ (current-indentation) gdscript-indent-offset)))))
 
 (provide 'gdscript-mode)
 

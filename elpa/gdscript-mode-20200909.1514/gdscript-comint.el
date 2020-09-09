@@ -29,13 +29,15 @@
 ;;
 ;;  godot-mode for handling stdout and stderr from godot executable.
 ;;
-;;  It support quick navigation from errors to file location.
+;;  It supports quick navigation from errors to file location.
 ;;
 ;;; Code:
 
 (require 'ansi-color)
 (require 'comint)
 (require 'compile)
+(require 'gdscript-customization)
+(require 'gdscript-format)
 (require 'gdscript-utils)
 
 (defvar gdscript-comint--mode-map
@@ -53,19 +55,30 @@
 
 ARGUMENTS are command line arguments for godot executable.
 When run it will kill existing process if one exists."
-  (let ((buffer-name (gdscript-util--get-godot-buffer-name))
-        (inhibit-read-only 1))
+  (let ((buffer-name (gdscript-util--get-godot-buffer-name (member "-e" arguments)))
+        (inhibit-read-only t))
+    (if (not (or (file-executable-p gdscript-godot-executable) (executable-find gdscript-godot-executable)))
+        (error "Error: Could not execute '%s'.  Please customize the `gdscript-godot-executable variable'" gdscript-godot-executable)
+      (with-current-buffer (get-buffer-create buffer-name)
+        (when gdscript-gdformat-save-and-format
+          (gdscript-comint-gdformat--modified-buffers))
+        (unless (derived-mode-p 'godot-mode)
+          (godot-mode)
+          (buffer-disable-undo))
+        (erase-buffer)
+        (comint-exec (current-buffer) buffer-name gdscript-godot-executable nil arguments)
+        (set-process-sentinel (get-buffer-process (current-buffer)) 'gdscript-comint--sentinel)
+        (pop-to-buffer (current-buffer))))))
 
-    (when (not (executable-find gdscript-godot-executable))
-      (error "Error: Could not find %s on PATH.  Please customize the gdscript-godot-executable variable" gdscript-godot-executable))
+(defun gdscript-comint--sentinel (process event)
+  "Custom sentinel for PROCESS and EVENT.
 
-    ;; start new godot
-    (with-current-buffer (get-buffer-create buffer-name)
-      (unless (derived-mode-p 'godot-mode)
-        (godot-mode)
-        (buffer-disable-undo))
-      (erase-buffer)
-      (comint-exec (current-buffer) buffer-name gdscript-godot-executable nil arguments))))
+Set process's buffer `inhibit-read-only' temporalily to value t,
+so that `internal-default-process-sentinel' can insert status
+message into the process’s buffer."
+  (with-current-buffer (process-buffer process)
+    (let ((inhibit-read-only t))
+      (internal-default-process-sentinel process event))))
 
 (define-derived-mode godot-mode comint-mode "godot"
   "Major mode for godot.
@@ -79,7 +92,7 @@ When run it will kill existing process if one exists."
   "Initialize buffer for comint mode support."
   (when (derived-mode-p 'comint-mode)
     (setq comint-process-echoes nil)
-    (setq comint-prompt-regexp "debug> ")
+    (setq comint-prompt-regexp "^debug> ")
     (setq-local comint-use-prompt-regexp t)
     (setq-local comint-prompt-read-only t)
     (setq-local comint-buffer-maximum-size 4096)
@@ -91,8 +104,8 @@ When run it will kill existing process if one exists."
   (setq-local
    compilation-error-regexp-alist
    '(
-     ("^   At: res://\\([[:word:]\/]+.gd\\):\\([[:digit:]]+\\)." 1 2 nil 2 1)
-     ("^*Frame [[:digit:]]+ - res://\\([[:word:]\/]+.gd\\):\\([[:digit:]]+\\)." 1 2 nil 2 1)))
+     ("^   At: res://\\([-_[:word:]\/]+.gd\\):\\([[:digit:]]+\\)." 1 2 nil 2 1)
+     ("^*Frame [[:digit:]]+ - res://\\([-_[:word:]\/]+.gd\\):\\([[:digit:]]+\\)." 1 2 nil 2 1)))
   (setq-local compilation-mode-font-lock-keywords nil)
   (compilation-setup t))
 

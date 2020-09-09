@@ -58,19 +58,6 @@
   :type 'integer
   :safe 'integerp)
 
-(defcustom gdscript-indent-guess-indent-offset
-  t "If t, tells GDScript mode to guess `gdscript-indent-offset' value."
-  :type 'boolean
-  :group 'gdscript
-  :safe 'booleanp)
-
-(defcustom gdscript-indent-guess-indent-offset-verbose
-  t "If t, emit a warning when guessing indentation fails."
-  :version "25.1"
-  :type 'boolean
-  :group 'gdscript
-  :safe 'booleanp)
-
 (defcustom gdscript-indent-trigger-commands '(indent-for-tab-command yas-expand yas/expand)
   "Commands that might trigger a `gdscript-indent-line' call."
   :type '(repeat symbol):group'gdscript)
@@ -104,9 +91,8 @@ fill parens."
   :safe 'natnump)
 
 (defcustom gdscript-godot-executable "godot"
-  "The path to the Godot executable.
-By default, it assumes that the executable is in the system's
-PATH."
+  "The godot executable which is either a full path such as '~/bin/godot2.2'
+or the name of an executable on the system PATH (usually 'godot')"
   :type 'string
   :group 'gdscript)
 
@@ -117,6 +103,28 @@ PATH."
   :type 'string
   :group 'gdscript)
 
+(defcustom gdscript-gdformat-line-length 100
+  "How many characters per line to allow when formatting gdscript by gdformat."
+  :type 'integer
+  :group 'gdscript)
+
+(defcustom gdscript-gdformat-save-and-format nil
+  "If t, save all modified buffers and format them with gdformat.
+It happens anytime Godot executable is run.  Formatting runs on background,
+so it is not slowing down Godot execution."
+  :type 'boolean
+  :group 'gdscript)
+
+(defcustom gdscript-docs-force-online-lookup nil
+  "If true, calling commands like gdscript-docs-browse-api browses the online API reference, even if a local copy is available."
+  :type 'boolean
+  :group 'gdscript)
+
+(defcustom gdscript-docs-use-eww t
+  "If set to false use the emacs configurable `browse-url' function rather than `eww' directly. `browse-url' can be configured to open the desktop default GUI browser, for example, via the variable `browse-url-browser-function'"
+  :type 'boolean
+  :group 'gdscript)
+
 (defcustom gdscript-docs-local-path ""
   "Optional path to a local build of the Godot documentation.
 If not set to an empty string, the commands `gdscript-docs-browse-api'
@@ -125,6 +133,12 @@ Must be the root directory of the website, that is to say, a
 directory path containing the file `index.html'."
   :type 'string
   :group 'gdscript)
+
+(defcustom gdscript-docs-online-search-api-url "https://docs.godotengine.org/en/stable/search.html?q=%s&check_keywords=yes&area=default"
+  "Online Godot API search url"
+  :type 'string
+  :group 'gdscript)
+
 
 (provide 'gdscript-customization)
 ;;; gdscript-customization.el ends here

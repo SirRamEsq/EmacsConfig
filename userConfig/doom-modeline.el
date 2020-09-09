@@ -3,11 +3,11 @@
 ; doom themes
 ; Favorite themes
 ;(load-theme 'doom-one t)
-;(load-theme 'doom-vibrant t)
+(load-theme 'doom-vibrant t)
 ;(load-theme 'doom-molokai t)
 ;(load-theme 'doom-tomorrow-day t)
 ;(load-theme 'doom-oceanic-next t)
-(load-theme 'doom-snazzy t)
+;(load-theme 'doom-snazzy t)
 
 ; Highlight color
 ;(set-face-attribute 'region nil :foreground "#ffffff")
